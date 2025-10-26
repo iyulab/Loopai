@@ -1,0 +1,6 @@
+@Loopai.CloudApi_HostAddress = http://localhost:5140
+
+GET {{Loopai.CloudApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

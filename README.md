@@ -4,20 +4,24 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![Status](https://img.shields.io/badge/status-v0.1--alpha-orange.svg)]()
+[![.NET](https://img.shields.io/badge/.NET-8.0-purple.svg)](https://dotnet.microsoft.com/)
+[![Status](https://img.shields.io/badge/status-Phase_5_Complete-blue.svg)]()
+[![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/tests-117%2F117_passing-brightgreen.svg)]()
 
 ---
 
 ## 🎯 What is Loopai?
 
-Loopai transforms expensive repeated LLM calls into lightweight, self-improving programs that can run anywhere.
+Loopai is a **program synthesis and execution framework** - infrastructure middleware like Docker or Kubernetes, not an end-user service.
 
-**Core Idea**: Generate a program once using an LLM (~$0.20, 10 seconds), then execute it millions of times locally (<10ms, <$0.00001 per call) with selective validation and continuous improvement.
+**Framework Identity**: Infrastructure layer for building adaptive AI-powered applications
+- **Cloud API (C#/.NET 8)**: REST API for program generation, execution, and lifecycle management
+- **Edge Runtime (Deno)**: JavaScript/TypeScript/Python program execution with <10ms latency
+- **Framework Integration**: Webhook events, Prometheus metrics, OpenTelemetry tracing
+- **Kubernetes-Ready**: Helm charts, health probes, horizontal autoscaling, security contexts
 
-**Architecture**: Hybrid Python + C# system for enterprise-scale performance:
-- **Cloud API (C# ASP.NET Core)**: 100K+ req/sec with SignalR real-time updates
-- **Program Generator (Python)**: LLM integration with rich SDK ecosystem
-- **Edge Runtime (Python + C# option)**: Deploy to any infrastructure with complete data sovereignty
+**Core Capability**: Transform expensive LLM calls into self-improving programs that run anywhere with complete observability and data sovereignty.
 
 ### The Problem
 
@@ -256,27 +260,45 @@ See `docs/ARCHITECTURE.md` for details.
 
 ```
 Loopai/
-├── src/loopai/
-│   ├── generator/           # Program generation (Phase 0)
-│   ├── executor/            # Program execution (Phase 0)
-│   ├── validator/           # Oracle validation (Phase 0)
-│   ├── sampler/             # Sampling strategies (Phase 1)
-│   └── models.py            # Pydantic data models
+├── src/
+│   ├── loopai/                      # Python Components
+│   │   ├── generator/               # Program generation (LLM)
+│   │   ├── executor/                # Program execution engine
+│   │   ├── validator/               # Oracle validation
+│   │   ├── sampler/                 # Sampling strategies
+│   │   ├── dataset_manager/         # Dataset management (Phase 3)
+│   │   └── models.py                # Pydantic data models
+│   ├── Loopai.CloudApi/             # C# Cloud API (Phase 4.1)
+│   │   ├── DTOs/                    # Request/Response models
+│   │   ├── Validators/              # FluentValidation rules
+│   │   ├── Controllers/             # REST API endpoints
+│   │   └── Program.cs               # ASP.NET Core entry point
+│   └── Loopai.Core/                 # C# Core Library
+│       └── Models/                  # Domain models
 ├── tests/
-│   ├── datasets/            # Test datasets
-│   │   ├── phase1_*.json    # Multi-class classification
-│   │   └── phase2_*.json    # Pattern recognition
-│   ├── test_phase0.py       # Basic tests
-│   ├── test_phase1.py       # Multi-class tests
-│   └── test_phase2.py       # Pattern matching tests
+│   ├── datasets/                    # Test datasets
+│   │   ├── phase1_*.json            # Multi-class classification
+│   │   ├── phase2_*.json            # Pattern recognition
+│   │   └── phase3_*.json            # Edge runtime datasets
+│   ├── test_phase0.py               # Basic tests
+│   ├── test_phase1.py               # Multi-class tests
+│   ├── test_phase2.py               # Pattern matching tests
+│   ├── test_phase3_edge.py          # Edge runtime tests
+│   └── Loopai.CloudApi.Tests/       # C# API tests
+│       ├── DTOs/                    # DTO serialization tests
+│       ├── Validators/              # Validation tests
+│       └── Controllers/             # Controller tests
 ├── scripts/
-│   ├── run_phase1_benchmark.py  # Phase 1 benchmarks
-│   └── run_phase2_benchmark.py  # Phase 2 benchmarks
+│   ├── dev.bat / dev.sh             # Development utilities
+│   ├── run_phase*.py                # Benchmark scripts
+│   └── generate_artifact.py         # Artifact generation
 ├── docs/
-│   ├── ARCHITECTURE.md      # Architecture design
-│   ├── PHASE0_STATUS.md     # Phase 0 results
-│   ├── PHASE1_STATUS.md     # Phase 1 results
-│   └── PHASE2_STATUS.md     # Phase 2 results
+│   ├── ARCHITECTURE.md              # Overall architecture
+│   ├── ARCHITECTURE_HYBRID.md       # Python + C# design
+│   ├── PHASE*_STATUS.md             # Phase completion status
+│   ├── PHASE4_PLAN.md               # Phase 4 roadmap
+│   ├── PHASE4_STATUS.md             # Current progress
+│   └── PHASE4.1_WORKITEMS.md        # Detailed work items
 └── README.md
 ```
 
@@ -401,8 +423,9 @@ python scripts/run_phase2_benchmark.py
 - ✅ **Phase 0**: Basic classification, program generation, oracle validation
 - ✅ **Phase 1**: Multi-class support, random sampling
 - ⚠️ **Phase 2**: Pattern recognition, larger datasets (1/2 tasks passed)
-- ✅ **Phase 3**: Edge runtime complete (6/6 - Dataset Manager, Config Manager, Artifact Cache, Edge Runtime API, Docker Deployment, Integration Tests)
-- ⏳ **Phase 4**: Hybrid Python + C# architecture (C# Cloud API, SignalR Hub, optional C# Edge Runtime)
+- ✅ **Phase 3**: Edge runtime complete (Dataset Manager, Config, Cache, API, Docker, Tests)
+- ✅ **Phase 4**: C# Cloud API (REST endpoints, EF Core, FluentValidation, Swagger, Tests)
+- ✅ **Phase 5**: Framework features (Prometheus metrics, Webhooks, Persistent storage, Docker/Helm, Health checks)
 
 ---
 

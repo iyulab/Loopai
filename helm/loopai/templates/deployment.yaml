@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "loopai.fullname" . }}
+  labels:
+    {{- include "loopai.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "loopai.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "loopai.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "loopai.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - name: {{ .Chart.Name }}
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.service.targetPort }}
+          protocol: TCP
+        - name: metrics
+          containerPort: {{ .Values.service.metricsPort }}
+          protocol: TCP
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.database.existingSecret }}
+              key: {{ .Values.database.existingSecretKey }}
+        - name: ConnectionStrings__DefaultConnection
+          value: {{ include "loopai.databaseConnectionString" . | quote }}
+        {{- if .Values.redis.enabled }}
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.redis.existingSecret }}
+              key: {{ .Values.redis.existingSecretKey }}
+        - name: Redis__Configuration
+          value: {{ include "loopai.redisConnectionString" . | quote }}
+        {{- end }}
+        {{- if .Values.opentelemetry.enabled }}
+        - name: OpenTelemetry__OtlpEndpoint
+          value: {{ .Values.opentelemetry.otlpEndpoint | quote }}
+        {{- end }}
+        {{- if .Values.rateLimiting.enabled }}
+        - name: RateLimiting__GeneralLimitPerMinute
+          value: {{ .Values.rateLimiting.generalLimitPerMinute | quote }}
+        - name: RateLimiting__GeneralLimitPerHour
+          value: {{ .Values.rateLimiting.generalLimitPerHour | quote }}
+        - name: RateLimiting__ExecuteLimitPerMinute
+          value: {{ .Values.rateLimiting.executeLimitPerMinute | quote }}
+        - name: RateLimiting__ExecuteLimitPerHour
+          value: {{ .Values.rateLimiting.executeLimitPerHour | quote }}
+        {{- end }}
+        - name: Webhooks__MaxSubscriptions
+          value: {{ .Values.webhooks.maxSubscriptions | quote }}
+        - name: Webhooks__MaxRetries
+          value: {{ .Values.webhooks.maxRetries | quote }}
+        - name: Webhooks__TimeoutSeconds
+          value: {{ .Values.webhooks.timeoutSeconds | quote }}
+        {{- with .Values.env }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.envFrom }}
+        envFrom:
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- if .Values.healthCheck.livenessProbe.enabled }}
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: {{ .Values.healthCheck.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.healthCheck.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.healthCheck.livenessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.healthCheck.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.healthCheck.livenessProbe.failureThreshold }}
+        {{- end }}
+        {{- if .Values.healthCheck.readinessProbe.enabled }}
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: http
+          initialDelaySeconds: {{ .Values.healthCheck.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.healthCheck.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.healthCheck.readinessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.healthCheck.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.healthCheck.readinessProbe.failureThreshold }}
+        {{- end }}
+        {{- if .Values.healthCheck.startupProbe.enabled }}
+        startupProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: {{ .Values.healthCheck.startupProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.healthCheck.startupProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.healthCheck.startupProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.healthCheck.startupProbe.successThreshold }}
+          failureThreshold: {{ .Values.healthCheck.startupProbe.failureThreshold }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        volumeMounts:
+        {{- toYaml .Values.volumeMounts | nindent 8 }}
+      volumes:
+      {{- toYaml .Values.volumes | nindent 6 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

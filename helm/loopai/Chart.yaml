@@ -1,0 +1,19 @@
+apiVersion: v2
+name: loopai
+description: Loopai - Program Synthesis and Execution Framework
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - loopai
+  - program-synthesis
+  - edge-runtime
+  - ai
+  - framework
+home: https://github.com/your-org/loopai
+sources:
+  - https://github.com/your-org/loopai
+maintainers:
+  - name: Loopai Team
+    email: support@loopai.dev
+icon: https://loopai.dev/logo.png
