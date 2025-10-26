@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "phase": 1,
+    "name": "spam_detection",
+    "description": "Email/SMS spam classification (binary)",
+    "difficulty": "simple",
+    "task_type": "classification",
+    "classes": ["spam", "ham"],
+    "total_samples": 500,
+    "accuracy_target": 0.85,
+    "sampling_rate": 0.2
+  },
+  "test_cases": [
+    {
+      "id": 1,
+      "input": "Congratulations! You've won a FREE $1000 gift card! Click here to claim NOW!",
+      "expected_output": "spam",
+      "difficulty": "trivial",
+      "keywords": ["free", "won", "claim"]
+    },
+    {
+      "id": 2,
+      "input": "Hi John, are we still meeting for lunch at 12pm today?",
+      "expected_output": "ham",
+      "difficulty": "trivial",
+      "keywords": ["meeting", "lunch"]
+    },
+    {
+      "id": 3,
+      "input": "URGENT: Your account will be locked unless you verify your information immediately!",
+      "expected_output": "spam",
+      "difficulty": "trivial",
+      "keywords": ["urgent", "locked", "verify", "immediately"]
+    },
+    {
+      "id": 4,
+      "input": "The project deadline has been extended to next Friday. Please update your schedules.",
+      "expected_output": "ham",
+      "difficulty": "trivial",
+      "keywords": ["project", "deadline", "schedule"]
+    },
+    {
+      "id": 5,
+      "input": "Make $5000 per week working from home! No experience needed! Limited spots available!",
+      "expected_output": "spam",
+      "difficulty": "trivial",
+      "keywords": ["make money", "work from home", "limited"]
+    },
+    {
+      "id": 6,
+      "input": "Mom, I'll be home late tonight. Traffic is terrible.",
+      "expected_output": "ham",
+      "difficulty": "trivial",
+      "keywords": ["mom", "home", "tonight"]
+    },
+    {
+      "id": 7,
+      "input": "Your prescription is ready for pickup at the pharmacy.",
+      "expected_output": "ham",
+      "difficulty": "easy",
+      "keywords": ["prescription", "pharmacy"]
+    },
+    {
+      "id": 8,
+      "input": "WINNER! You are selected for a luxury cruise. Call now: 1-800-SCAM-NOW",
+      "expected_output": "spam",
+      "difficulty": "trivial",
+      "keywords": ["winner", "selected", "call now"]
+    },
+    {
+      "id": 9,
+      "input": "Reminder: Your dentist appointment is tomorrow at 3pm.",
+      "expected_output": "ham",
+      "difficulty": "easy",
+      "keywords": ["reminder", "appointment"]
+    },
+    {
+      "id": 10,
+      "input": "Click this link to update your payment information or your service will be suspended.",
+      "expected_output": "spam",
+      "difficulty": "easy",
+      "keywords": ["click", "update", "suspended"]
+    },
+    {
+      "id": 11,
+      "input": "Thanks for your help with the presentation yesterday. The client loved it!",
+      "expected_output": "ham",
+      "difficulty": "easy",
+      "keywords": ["thanks", "presentation", "client"]
+    },
+    {
+      "id": 12,
+      "input": "Get amazing deals on designer watches! Up to 90% off! Don't miss out!",
+      "expected_output": "spam",
+      "difficulty": "trivial",
+      "keywords": ["deals", "off", "don't miss"]
+    },
+    {
+      "id": 13,
+      "input": "Your package has been delivered to your front door.",
+      "expected_output": "ham",
+      "difficulty": "easy",
+      "keywords": ["package", "delivered"]
+    },
+    {
+      "id": 14,
+      "input": "ALERT: Suspicious activity detected on your account. Verify now to avoid lockout.",
+      "expected_output": "spam",
+      "difficulty": "easy",
+      "keywords": ["alert", "suspicious", "verify"]
+    },
+    {
+      "id": 15,
+      "input": "Can you pick up milk on your way home? We're all out.",
+      "expected_output": "ham",
+      "difficulty": "trivial",
+      "keywords": ["pick up", "home"]
+    },
+    {
+      "id": 16,
+      "input": "Lose 30 pounds in 30 days with this ONE weird trick! Doctors hate this!",
+      "expected_output": "spam",
+      "difficulty": "easy",
+      "keywords": ["lose weight", "weird trick", "doctors hate"]
+    },
+    {
+      "id": 17,
+      "input": "Your flight is on time. Gate B12. Boarding begins at 5:30pm.",
+      "expected_output": "ham",
+      "difficulty": "easy",
+      "keywords": ["flight", "gate", "boarding"]
+    },
+    {
+      "id": 18,
+      "input": "Act NOW! Limited time offer expires in 24 hours! Free shipping!",
+      "expected_output": "spam",
+      "difficulty": "trivial",
+      "keywords": ["act now", "limited time", "free shipping"]
+    },
+    {
+      "id": 19,
+      "input": "The meeting notes from this morning are attached. Let me know if you have questions.",
+      "expected_output": "ham",
+      "difficulty": "easy",
+      "keywords": ["meeting notes", "attached"]
+    },
+    {
+      "id": 20,
+      "input": "You've been pre-approved for a loan up to $50,000! No credit check required!",
+      "expected_output": "spam",
+      "difficulty": "easy",
+      "keywords": ["pre-approved", "loan", "no credit check"]
+    }
+  ]
+}

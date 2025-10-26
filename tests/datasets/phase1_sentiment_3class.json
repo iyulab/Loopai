@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "phase": 1,
+    "name": "sentiment_3class",
+    "description": "Product review sentiment classification (3-class: positive, negative, neutral)",
+    "difficulty": "simple",
+    "task_type": "classification",
+    "classes": ["positive", "negative", "neutral"],
+    "total_samples": 60,
+    "accuracy_target": 0.80,
+    "sampling_rate": 0.2
+  },
+  "test_cases": [
+    {
+      "id": 1,
+      "input": "This product is absolutely amazing! Best purchase I've ever made!",
+      "expected_output": "positive",
+      "difficulty": "trivial",
+      "keywords": ["amazing", "best"]
+    },
+    {
+      "id": 2,
+      "input": "Terrible quality. Complete waste of money. Very disappointed.",
+      "expected_output": "negative",
+      "difficulty": "trivial",
+      "keywords": ["terrible", "waste", "disappointed"]
+    },
+    {
+      "id": 3,
+      "input": "The product arrived on time and works as described.",
+      "expected_output": "neutral",
+      "difficulty": "easy",
+      "keywords": ["arrived", "works", "described"]
+    },
+    {
+      "id": 4,
+      "input": "Love it! Exceeded all my expectations. Highly recommend!",
+      "expected_output": "positive",
+      "difficulty": "trivial",
+      "keywords": ["love", "exceeded", "recommend"]
+    },
+    {
+      "id": 5,
+      "input": "Broke after one day of use. Don't buy this garbage.",
+      "expected_output": "negative",
+      "difficulty": "trivial",
+      "keywords": ["broke", "don't buy", "garbage"]
+    },
+    {
+      "id": 6,
+      "input": "It does what it's supposed to do. Nothing special.",
+      "expected_output": "neutral",
+      "difficulty": "easy",
+      "keywords": ["does", "supposed", "nothing special"]
+    },
+    {
+      "id": 7,
+      "input": "Outstanding quality! Worth every penny!",
+      "expected_output": "positive",
+      "difficulty": "trivial",
+      "keywords": ["outstanding", "worth"]
+    },
+    {
+      "id": 8,
+      "input": "Poor customer service and defective product. Avoid!",
+      "expected_output": "negative",
+      "difficulty": "trivial",
+      "keywords": ["poor", "defective", "avoid"]
+    },
+    {
+      "id": 9,
+      "input": "Average product. It's okay for the price.",
+      "expected_output": "neutral",
+      "difficulty": "easy",
+      "keywords": ["average", "okay", "price"]
+    },
+    {
+      "id": 10,
+      "input": "Fantastic! I'm buying another one for my friend!",
+      "expected_output": "positive",
+      "difficulty": "trivial",
+      "keywords": ["fantastic", "buying another"]
+    },
+    {
+      "id": 11,
+      "input": "Horrible experience. Would not recommend to anyone.",
+      "expected_output": "negative",
+      "difficulty": "trivial",
+      "keywords": ["horrible", "not recommend"]
+    },
+    {
+      "id": 12,
+      "input": "The item matches the description. Shipping was standard.",
+      "expected_output": "neutral",
+      "difficulty": "easy",
+      "keywords": ["matches", "description", "standard"]
+    },
+    {
+      "id": 13,
+      "input": "Excellent build quality. Very impressed with the craftsmanship.",
+      "expected_output": "positive",
+      "difficulty": "trivial",
+      "keywords": ["excellent", "impressed"]
+    },
+    {
+      "id": 14,
+      "input": "Cheap materials. Fell apart quickly. Not worth it.",
+      "expected_output": "negative",
+      "difficulty": "trivial",
+      "keywords": ["cheap", "fell apart", "not worth"]
+    },
+    {
+      "id": 15,
+      "input": "Functional and meets basic requirements. No complaints.",
+      "expected_output": "neutral",
+      "difficulty": "easy",
+      "keywords": ["functional", "meets", "no complaints"]
+    },
+    {
+      "id": 16,
+      "input": "Best in class! Highly satisfied with this purchase!",
+      "expected_output": "positive",
+      "difficulty": "trivial",
+      "keywords": ["best", "satisfied"]
+    },
+    {
+      "id": 17,
+      "input": "Unreliable and breaks easily. Save your money.",
+      "expected_output": "negative",
+      "difficulty": "trivial",
+      "keywords": ["unreliable", "breaks", "save money"]
+    },
+    {
+      "id": 18,
+      "input": "As expected. Does the job without issues.",
+      "expected_output": "neutral",
+      "difficulty": "easy",
+      "keywords": ["expected", "does job"]
+    },
+    {
+      "id": 19,
+      "input": "Wonderful product! My family loves it!",
+      "expected_output": "positive",
+      "difficulty": "trivial",
+      "keywords": ["wonderful", "loves"]
+    },
+    {
+      "id": 20,
+      "input": "Frustrating to use. Poor design. Returning it.",
+      "expected_output": "negative",
+      "difficulty": "trivial",
+      "keywords": ["frustrating", "poor", "returning"]
+    }
+  ]
+}

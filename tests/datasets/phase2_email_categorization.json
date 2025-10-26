@@ -1,0 +1,2620 @@
+{
+  "metadata": {
+    "phase": 2,
+    "name": "email_categorization",
+    "description": "Categorize emails into work, personal, promotional, or spam",
+    "difficulty": "moderate",
+    "task_type": "classification",
+    "classes": [
+      "work",
+      "personal",
+      "promotional",
+      "spam"
+    ],
+    "total_samples": 200,
+    "accuracy_target": 0.85,
+    "sampling_rate": 0.2
+  },
+  "test_cases": [
+    {
+      "id": 1,
+      "input": "Meeting scheduled for 2pm tomorrow in Conference Room A",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 2,
+      "input": "Please review the quarterly report by EOD",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 3,
+      "input": "Project deadline has been moved to next Friday",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 4,
+      "input": "Team standup at 9am sharp",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 5,
+      "input": "Quarterly performance review due next week",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 6,
+      "input": "Please submit your timesheet by Friday",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 7,
+      "input": "Conference call with client at 3pm today",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 8,
+      "input": "Updated project timeline attached",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 9,
+      "input": "Budget approval needed for Q2",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 10,
+      "input": "Sprint planning meeting moved to Thursday",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 11,
+      "input": "Please update the project documentation",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 12,
+      "input": "Code review scheduled for this afternoon",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 13,
+      "input": "Department meeting cancelled",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 14,
+      "input": "New employee orientation on Monday",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 15,
+      "input": "IT maintenance scheduled for weekend",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 16,
+      "input": "Annual training mandatory for all staff",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 17,
+      "input": "Office will be closed for holiday",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 18,
+      "input": "Please RSVP for company event",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 19,
+      "input": "Updated company policies attached",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 20,
+      "input": "Benefits enrollment deadline approaching",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 21,
+      "input": "Meeting scheduled for 2pm tomorrow in Conference Room A - follow up required",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 22,
+      "input": "Please review the quarterly report by EOD - follow up required",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 23,
+      "input": "Project deadline has been moved to next Friday - follow up required",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 24,
+      "input": "Team standup at 9am sharp - follow up required",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 25,
+      "input": "Quarterly performance review due next week - follow up required",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 26,
+      "input": "Please submit your timesheet by Friday - follow up required",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 27,
+      "input": "Conference call with client at 3pm today - follow up required",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 28,
+      "input": "Updated project timeline attached - follow up required",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 29,
+      "input": "Budget approval needed for Q2 - follow up required",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 30,
+      "input": "Sprint planning meeting moved to Thursday - follow up required",
+      "expected_output": "work",
+      "difficulty": "easy",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 31,
+      "input": "Please update the project documentation - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 32,
+      "input": "Code review scheduled for this afternoon - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 33,
+      "input": "Department meeting cancelled - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 34,
+      "input": "New employee orientation on Monday - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 35,
+      "input": "IT maintenance scheduled for weekend - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 36,
+      "input": "Annual training mandatory for all staff - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 37,
+      "input": "Office will be closed for holiday - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 38,
+      "input": "Please RSVP for company event - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 39,
+      "input": "Updated company policies attached - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 40,
+      "input": "Benefits enrollment deadline approaching - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 41,
+      "input": "Meeting scheduled for 2pm tomorrow in Conference Room A - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 42,
+      "input": "Please review the quarterly report by EOD - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 43,
+      "input": "Project deadline has been moved to next Friday - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 44,
+      "input": "Team standup at 9am sharp - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 45,
+      "input": "Quarterly performance review due next week - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 46,
+      "input": "Please submit your timesheet by Friday - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 47,
+      "input": "Conference call with client at 3pm today - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 48,
+      "input": "Updated project timeline attached - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 49,
+      "input": "Budget approval needed for Q2 - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 50,
+      "input": "Sprint planning meeting moved to Thursday - follow up required",
+      "expected_output": "work",
+      "difficulty": "moderate",
+      "patterns": [
+        "meeting",
+        "project",
+        "deadline",
+        "report",
+        "review"
+      ]
+    },
+    {
+      "id": 51,
+      "input": "Happy birthday! Hope you have a great day!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 52,
+      "input": "Dinner plans for this weekend?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 53,
+      "input": "Thanks for helping me move last week",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 54,
+      "input": "Family reunion next month, are you coming?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 55,
+      "input": "Congratulations on your new house!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 56,
+      "input": "Movie night on Friday?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 57,
+      "input": "How are the kids doing?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 58,
+      "input": "Loved seeing you at the party",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 59,
+      "input": "Vacation photos attached!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 60,
+      "input": "Game night at my place Saturday",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 61,
+      "input": "Happy birthday! Hope you have a great day!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 62,
+      "input": "Dinner plans for this weekend?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 63,
+      "input": "Thanks for helping me move last week",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 64,
+      "input": "Family reunion next month, are you coming?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 65,
+      "input": "Congratulations on your new house!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 66,
+      "input": "Movie night on Friday?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 67,
+      "input": "How are the kids doing?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 68,
+      "input": "Loved seeing you at the party",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 69,
+      "input": "Vacation photos attached!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 70,
+      "input": "Game night at my place Saturday",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 71,
+      "input": "Happy birthday! Hope you have a great day!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 72,
+      "input": "Dinner plans for this weekend?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 73,
+      "input": "Thanks for helping me move last week",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 74,
+      "input": "Family reunion next month, are you coming?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 75,
+      "input": "Congratulations on your new house!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 76,
+      "input": "Movie night on Friday?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 77,
+      "input": "How are the kids doing?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 78,
+      "input": "Loved seeing you at the party",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 79,
+      "input": "Vacation photos attached!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 80,
+      "input": "Game night at my place Saturday",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 81,
+      "input": "Happy birthday! Hope you have a great day!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 82,
+      "input": "Dinner plans for this weekend?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 83,
+      "input": "Thanks for helping me move last week",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 84,
+      "input": "Family reunion next month, are you coming?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 85,
+      "input": "Congratulations on your new house!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 86,
+      "input": "Movie night on Friday?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 87,
+      "input": "How are the kids doing?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 88,
+      "input": "Loved seeing you at the party",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 89,
+      "input": "Vacation photos attached!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 90,
+      "input": "Game night at my place Saturday",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 91,
+      "input": "Happy birthday! Hope you have a great day!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 92,
+      "input": "Dinner plans for this weekend?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 93,
+      "input": "Thanks for helping me move last week",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 94,
+      "input": "Family reunion next month, are you coming?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 95,
+      "input": "Congratulations on your new house!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 96,
+      "input": "Movie night on Friday?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 97,
+      "input": "How are the kids doing?",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 98,
+      "input": "Loved seeing you at the party",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 99,
+      "input": "Vacation photos attached!",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 100,
+      "input": "Game night at my place Saturday",
+      "expected_output": "personal",
+      "difficulty": "easy",
+      "patterns": [
+        "birthday",
+        "family",
+        "friend",
+        "party",
+        "vacation"
+      ]
+    },
+    {
+      "id": 101,
+      "input": "50% off all items this weekend only!",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 102,
+      "input": "Limited time offer - Buy one get one free!",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 103,
+      "input": "Flash sale ends tonight at midnight",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 104,
+      "input": "Exclusive member discount - 30% off",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 105,
+      "input": "New arrivals just added to our store",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 106,
+      "input": "Clearance sale - Up to 70% off!",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 107,
+      "input": "Subscribe now and get 20% off your first order",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 108,
+      "input": "Free shipping on orders over 50 dollars",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 109,
+      "input": "Seasonal sale - Amazing deals inside",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 110,
+      "input": "Last chance to save big!",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 111,
+      "input": "50% off all items this weekend only!",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 112,
+      "input": "Limited time offer - Buy one get one free!",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 113,
+      "input": "Flash sale ends tonight at midnight",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 114,
+      "input": "Exclusive member discount - 30% off",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 115,
+      "input": "New arrivals just added to our store",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 116,
+      "input": "Clearance sale - Up to 70% off!",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 117,
+      "input": "Subscribe now and get 20% off your first order",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 118,
+      "input": "Free shipping on orders over 50 dollars",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 119,
+      "input": "Seasonal sale - Amazing deals inside",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 120,
+      "input": "Last chance to save big!",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 121,
+      "input": "50% off all items this weekend only!",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 122,
+      "input": "Limited time offer - Buy one get one free!",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 123,
+      "input": "Flash sale ends tonight at midnight",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 124,
+      "input": "Exclusive member discount - 30% off",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 125,
+      "input": "New arrivals just added to our store",
+      "expected_output": "promotional",
+      "difficulty": "easy",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 126,
+      "input": "Clearance sale - Up to 70% off!",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 127,
+      "input": "Subscribe now and get 20% off your first order",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 128,
+      "input": "Free shipping on orders over 50 dollars",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 129,
+      "input": "Seasonal sale - Amazing deals inside",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 130,
+      "input": "Last chance to save big!",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 131,
+      "input": "50% off all items this weekend only!",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 132,
+      "input": "Limited time offer - Buy one get one free!",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 133,
+      "input": "Flash sale ends tonight at midnight",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 134,
+      "input": "Exclusive member discount - 30% off",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 135,
+      "input": "New arrivals just added to our store",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 136,
+      "input": "Clearance sale - Up to 70% off!",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 137,
+      "input": "Subscribe now and get 20% off your first order",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 138,
+      "input": "Free shipping on orders over 50 dollars",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 139,
+      "input": "Seasonal sale - Amazing deals inside",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 140,
+      "input": "Last chance to save big!",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 141,
+      "input": "50% off all items this weekend only!",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 142,
+      "input": "Limited time offer - Buy one get one free!",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 143,
+      "input": "Flash sale ends tonight at midnight",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 144,
+      "input": "Exclusive member discount - 30% off",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 145,
+      "input": "New arrivals just added to our store",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 146,
+      "input": "Clearance sale - Up to 70% off!",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 147,
+      "input": "Subscribe now and get 20% off your first order",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 148,
+      "input": "Free shipping on orders over 50 dollars",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 149,
+      "input": "Seasonal sale - Amazing deals inside",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 150,
+      "input": "Last chance to save big!",
+      "expected_output": "promotional",
+      "difficulty": "moderate",
+      "patterns": [
+        "sale",
+        "discount",
+        "offer",
+        "deal",
+        "limited"
+      ]
+    },
+    {
+      "id": 151,
+      "input": "URGENT: Your account will be suspended unless you verify now!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 152,
+      "input": "You have won 1000000 dollars! Click here to claim your prize!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 153,
+      "input": "Act now to get rich quick with this amazing opportunity!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 154,
+      "input": "Lose 30 pounds in 30 days with this one weird trick!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 155,
+      "input": "Nigerian prince needs your help transferring funds",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 156,
+      "input": "Congratulations! You are our lucky winner!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 157,
+      "input": "Make money fast from home - no experience needed!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 158,
+      "input": "Your package is waiting - confirm your address immediately",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 159,
+      "input": "WINNER ALERT: Claim your free iPhone now!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 160,
+      "input": "This is not spam - but you won a luxury vacation!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 161,
+      "input": "URGENT: Your account will be suspended unless you verify now!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 162,
+      "input": "You have won 1000000 dollars! Click here to claim your prize!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 163,
+      "input": "Act now to get rich quick with this amazing opportunity!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 164,
+      "input": "Lose 30 pounds in 30 days with this one weird trick!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 165,
+      "input": "Nigerian prince needs your help transferring funds",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 166,
+      "input": "Congratulations! You are our lucky winner!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 167,
+      "input": "Make money fast from home - no experience needed!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 168,
+      "input": "Your package is waiting - confirm your address immediately",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 169,
+      "input": "WINNER ALERT: Claim your free iPhone now!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 170,
+      "input": "This is not spam - but you won a luxury vacation!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 171,
+      "input": "URGENT: Your account will be suspended unless you verify now!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 172,
+      "input": "You have won 1000000 dollars! Click here to claim your prize!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 173,
+      "input": "Act now to get rich quick with this amazing opportunity!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 174,
+      "input": "Lose 30 pounds in 30 days with this one weird trick!",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 175,
+      "input": "Nigerian prince needs your help transferring funds",
+      "expected_output": "spam",
+      "difficulty": "moderate",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 176,
+      "input": "Congratulations! You are our lucky winner!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 177,
+      "input": "Make money fast from home - no experience needed!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 178,
+      "input": "Your package is waiting - confirm your address immediately",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 179,
+      "input": "WINNER ALERT: Claim your free iPhone now!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 180,
+      "input": "This is not spam - but you won a luxury vacation!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 181,
+      "input": "URGENT: Your account will be suspended unless you verify now!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 182,
+      "input": "You have won 1000000 dollars! Click here to claim your prize!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 183,
+      "input": "Act now to get rich quick with this amazing opportunity!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 184,
+      "input": "Lose 30 pounds in 30 days with this one weird trick!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 185,
+      "input": "Nigerian prince needs your help transferring funds",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 186,
+      "input": "Congratulations! You are our lucky winner!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 187,
+      "input": "Make money fast from home - no experience needed!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 188,
+      "input": "Your package is waiting - confirm your address immediately",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 189,
+      "input": "WINNER ALERT: Claim your free iPhone now!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 190,
+      "input": "This is not spam - but you won a luxury vacation!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 191,
+      "input": "URGENT: Your account will be suspended unless you verify now!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 192,
+      "input": "You have won 1000000 dollars! Click here to claim your prize!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 193,
+      "input": "Act now to get rich quick with this amazing opportunity!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 194,
+      "input": "Lose 30 pounds in 30 days with this one weird trick!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 195,
+      "input": "Nigerian prince needs your help transferring funds",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 196,
+      "input": "Congratulations! You are our lucky winner!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 197,
+      "input": "Make money fast from home - no experience needed!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 198,
+      "input": "Your package is waiting - confirm your address immediately",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 199,
+      "input": "WINNER ALERT: Claim your free iPhone now!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    },
+    {
+      "id": 200,
+      "input": "This is not spam - but you won a luxury vacation!",
+      "expected_output": "spam",
+      "difficulty": "hard",
+      "patterns": [
+        "urgent",
+        "winner",
+        "claim",
+        "prize",
+        "click here"
+      ]
+    }
+  ]
+}

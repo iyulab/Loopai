@@ -1,0 +1,2869 @@
+{
+  "metadata": {
+    "phase": 2,
+    "name": "intent_classification",
+    "description": "Classify text intent as question, command, or statement",
+    "difficulty": "moderate",
+    "task_type": "classification",
+    "classes": [
+      "question",
+      "command",
+      "statement"
+    ],
+    "total_samples": 150,
+    "accuracy_target": 0.85,
+    "sampling_rate": 0.2
+  },
+  "test_cases": [
+    {
+      "id": 1,
+      "input": "What time is the meeting?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 2,
+      "input": "Where did you put the report?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 3,
+      "input": "How do I reset my password?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 4,
+      "input": "When is the deadline for this project?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 5,
+      "input": "Who is responsible for code review?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 6,
+      "input": "Why was the meeting cancelled?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 7,
+      "input": "Which option should I choose?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 8,
+      "input": "Can you help me with this task?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 9,
+      "input": "Is the server back online?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 10,
+      "input": "Are we still meeting tomorrow?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 11,
+      "input": "Could you send me the document?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 12,
+      "input": "Would you like to join us for lunch?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 13,
+      "input": "Have you finished the assignment?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 14,
+      "input": "Do you know where the files are?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 15,
+      "input": "Did the email go through?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 16,
+      "input": "What are the requirements for this feature?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 17,
+      "input": "How long will the maintenance take?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 18,
+      "input": "When will the update be released?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 19,
+      "input": "Where can I find the documentation?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 20,
+      "input": "Who approved this change?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 21,
+      "input": "What time is the meeting?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 22,
+      "input": "Where did you put the report?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 23,
+      "input": "How do I reset my password?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 24,
+      "input": "When is the deadline for this project?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 25,
+      "input": "Who is responsible for code review?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 26,
+      "input": "Why was the meeting cancelled?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 27,
+      "input": "Which option should I choose?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 28,
+      "input": "Can you help me with this task?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 29,
+      "input": "Is the server back online?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 30,
+      "input": "Are we still meeting tomorrow?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 31,
+      "input": "Could you send me the document?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 32,
+      "input": "Would you like to join us for lunch?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 33,
+      "input": "Have you finished the assignment?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 34,
+      "input": "Do you know where the files are?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 35,
+      "input": "Did the email go through?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 36,
+      "input": "What are the requirements for this feature?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 37,
+      "input": "How long will the maintenance take?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 38,
+      "input": "When will the update be released?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 39,
+      "input": "Where can I find the documentation?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 40,
+      "input": "Who approved this change?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 41,
+      "input": "What time is the meeting?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 42,
+      "input": "Where did you put the report?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 43,
+      "input": "How do I reset my password?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 44,
+      "input": "When is the deadline for this project?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 45,
+      "input": "Who is responsible for code review?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 46,
+      "input": "Why was the meeting cancelled?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 47,
+      "input": "Which option should I choose?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 48,
+      "input": "Can you help me with this task?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 49,
+      "input": "Is the server back online?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 50,
+      "input": "Are we still meeting tomorrow?",
+      "expected_output": "question",
+      "difficulty": "easy",
+      "patterns": [
+        "what",
+        "where",
+        "when",
+        "who",
+        "why",
+        "how",
+        "which",
+        "can",
+        "could",
+        "would",
+        "is",
+        "are",
+        "do",
+        "did"
+      ]
+    },
+    {
+      "id": 51,
+      "input": "Please submit the report by Friday",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 52,
+      "input": "Send me the updated files",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 53,
+      "input": "Review the pull request",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 54,
+      "input": "Update the documentation",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 55,
+      "input": "Deploy the changes to production",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 56,
+      "input": "Schedule a meeting for next week",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 57,
+      "input": "Cancel the subscription",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 58,
+      "input": "Forward this email to the team",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 59,
+      "input": "Approve the budget request",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 60,
+      "input": "Close the ticket",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 61,
+      "input": "Restart the server",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 62,
+      "input": "Check the logs for errors",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 63,
+      "input": "Notify the client about the delay",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 64,
+      "input": "Archive the old files",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 65,
+      "input": "Backup the database",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 66,
+      "input": "Install the latest updates",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 67,
+      "input": "Configure the settings",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 68,
+      "input": "Run the tests",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 69,
+      "input": "Merge the branches",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 70,
+      "input": "Delete the temporary files",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 71,
+      "input": "Please submit the report by Friday",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 72,
+      "input": "Send me the updated files",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 73,
+      "input": "Review the pull request",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 74,
+      "input": "Update the documentation",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 75,
+      "input": "Deploy the changes to production",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 76,
+      "input": "Schedule a meeting for next week",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 77,
+      "input": "Cancel the subscription",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 78,
+      "input": "Forward this email to the team",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 79,
+      "input": "Approve the budget request",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 80,
+      "input": "Close the ticket",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 81,
+      "input": "Restart the server",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 82,
+      "input": "Check the logs for errors",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 83,
+      "input": "Notify the client about the delay",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 84,
+      "input": "Archive the old files",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 85,
+      "input": "Backup the database",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 86,
+      "input": "Install the latest updates",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 87,
+      "input": "Configure the settings",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 88,
+      "input": "Run the tests",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 89,
+      "input": "Merge the branches",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 90,
+      "input": "Delete the temporary files",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 91,
+      "input": "Please submit the report by Friday",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 92,
+      "input": "Send me the updated files",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 93,
+      "input": "Review the pull request",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 94,
+      "input": "Update the documentation",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 95,
+      "input": "Deploy the changes to production",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 96,
+      "input": "Schedule a meeting for next week",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 97,
+      "input": "Cancel the subscription",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 98,
+      "input": "Forward this email to the team",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 99,
+      "input": "Approve the budget request",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 100,
+      "input": "Close the ticket",
+      "expected_output": "command",
+      "difficulty": "easy",
+      "patterns": [
+        "please",
+        "send",
+        "review",
+        "update",
+        "deploy",
+        "schedule",
+        "cancel",
+        "forward",
+        "approve",
+        "close"
+      ]
+    },
+    {
+      "id": 101,
+      "input": "The project is completed",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 102,
+      "input": "I finished reviewing the code",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 103,
+      "input": "The server went down at 3pm",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 104,
+      "input": "We have a new deadline",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 105,
+      "input": "The client approved the proposal",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 106,
+      "input": "All tests are passing",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 107,
+      "input": "The database backup completed successfully",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 108,
+      "input": "I will be out of office tomorrow",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 109,
+      "input": "The feature has been deployed",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 110,
+      "input": "We received positive feedback",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 111,
+      "input": "The bug has been fixed",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 112,
+      "input": "The report is ready for review",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 113,
+      "input": "I updated the documentation",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 114,
+      "input": "The meeting went well",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 115,
+      "input": "We are on track with the timeline",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 116,
+      "input": "The performance has improved",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 117,
+      "input": "I spoke with the stakeholder",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 118,
+      "input": "The issue is resolved",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 119,
+      "input": "We need more resources",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 120,
+      "input": "The requirements have changed",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 121,
+      "input": "The project is completed",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 122,
+      "input": "I finished reviewing the code",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 123,
+      "input": "The server went down at 3pm",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 124,
+      "input": "We have a new deadline",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 125,
+      "input": "The client approved the proposal",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 126,
+      "input": "All tests are passing",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 127,
+      "input": "The database backup completed successfully",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 128,
+      "input": "I will be out of office tomorrow",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 129,
+      "input": "The feature has been deployed",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 130,
+      "input": "We received positive feedback",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 131,
+      "input": "The bug has been fixed",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 132,
+      "input": "The report is ready for review",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 133,
+      "input": "I updated the documentation",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 134,
+      "input": "The meeting went well",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 135,
+      "input": "We are on track with the timeline",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 136,
+      "input": "The performance has improved",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 137,
+      "input": "I spoke with the stakeholder",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 138,
+      "input": "The issue is resolved",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 139,
+      "input": "We need more resources",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 140,
+      "input": "The requirements have changed",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 141,
+      "input": "The project is completed",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 142,
+      "input": "I finished reviewing the code",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 143,
+      "input": "The server went down at 3pm",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 144,
+      "input": "We have a new deadline",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 145,
+      "input": "The client approved the proposal",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 146,
+      "input": "All tests are passing",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 147,
+      "input": "The database backup completed successfully",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 148,
+      "input": "I will be out of office tomorrow",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 149,
+      "input": "The feature has been deployed",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    },
+    {
+      "id": 150,
+      "input": "We received positive feedback",
+      "expected_output": "statement",
+      "difficulty": "moderate",
+      "patterns": [
+        "is",
+        "are",
+        "has",
+        "have",
+        "was",
+        "were",
+        "will",
+        "completed",
+        "finished"
+      ]
+    }
+  ]
+}

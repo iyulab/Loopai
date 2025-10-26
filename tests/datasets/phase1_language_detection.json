@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "phase": 1,
+    "name": "language_detection",
+    "description": "Detect language of text (multi-class)",
+    "difficulty": "simple",
+    "task_type": "classification",
+    "classes": ["english", "spanish", "french", "german", "chinese"],
+    "total_samples": 50,
+    "accuracy_target": 0.85,
+    "sampling_rate": 0.2
+  },
+  "test_cases": [
+    {
+      "id": 1,
+      "input": "Hello, how are you today?",
+      "expected_output": "english",
+      "difficulty": "trivial",
+      "keywords": ["hello", "how", "are", "you"]
+    },
+    {
+      "id": 2,
+      "input": "Hola, ¿cómo estás hoy?",
+      "expected_output": "spanish",
+      "difficulty": "trivial",
+      "keywords": ["hola", "cómo", "estás"]
+    },
+    {
+      "id": 3,
+      "input": "Bonjour, comment allez-vous aujourd'hui?",
+      "expected_output": "french",
+      "difficulty": "trivial",
+      "keywords": ["bonjour", "comment", "allez"]
+    },
+    {
+      "id": 4,
+      "input": "Guten Tag, wie geht es Ihnen heute?",
+      "expected_output": "german",
+      "difficulty": "trivial",
+      "keywords": ["guten", "wie", "geht"]
+    },
+    {
+      "id": 5,
+      "input": "你好，你今天怎么样？",
+      "expected_output": "chinese",
+      "difficulty": "trivial",
+      "keywords": ["你好", "今天"]
+    },
+    {
+      "id": 6,
+      "input": "The weather is beautiful this morning.",
+      "expected_output": "english",
+      "difficulty": "easy",
+      "keywords": ["weather", "beautiful", "morning"]
+    },
+    {
+      "id": 7,
+      "input": "Me gusta mucho la música española.",
+      "expected_output": "spanish",
+      "difficulty": "easy",
+      "keywords": ["gusta", "música"]
+    },
+    {
+      "id": 8,
+      "input": "J'aime beaucoup la cuisine française.",
+      "expected_output": "french",
+      "difficulty": "easy",
+      "keywords": ["aime", "cuisine", "française"]
+    },
+    {
+      "id": 9,
+      "input": "Ich liebe deutsche Schokolade sehr.",
+      "expected_output": "german",
+      "difficulty": "easy",
+      "keywords": ["liebe", "deutsche"]
+    },
+    {
+      "id": 10,
+      "input": "我喜欢中国菜。",
+      "expected_output": "chinese",
+      "difficulty": "easy",
+      "keywords": ["喜欢", "中国"]
+    },
+    {
+      "id": 11,
+      "input": "What time is the meeting scheduled for?",
+      "expected_output": "english",
+      "difficulty": "easy",
+      "keywords": ["what", "time", "meeting"]
+    },
+    {
+      "id": 12,
+      "input": "¿A qué hora es la reunión?",
+      "expected_output": "spanish",
+      "difficulty": "easy",
+      "keywords": ["qué", "hora", "reunión"]
+    },
+    {
+      "id": 13,
+      "input": "À quelle heure est la réunion?",
+      "expected_output": "french",
+      "difficulty": "easy",
+      "keywords": ["quelle", "heure", "réunion"]
+    },
+    {
+      "id": 14,
+      "input": "Um wie viel Uhr ist das Treffen?",
+      "expected_output": "german",
+      "difficulty": "easy",
+      "keywords": ["wie", "viel", "uhr", "treffen"]
+    },
+    {
+      "id": 15,
+      "input": "会议什么时候开始？",
+      "expected_output": "chinese",
+      "difficulty": "easy",
+      "keywords": ["会议", "什么时候"]
+    },
+    {
+      "id": 16,
+      "input": "I need to buy some groceries after work.",
+      "expected_output": "english",
+      "difficulty": "easy",
+      "keywords": ["need", "buy", "groceries", "work"]
+    },
+    {
+      "id": 17,
+      "input": "Necesito comprar comida después del trabajo.",
+      "expected_output": "spanish",
+      "difficulty": "easy",
+      "keywords": ["necesito", "comprar", "trabajo"]
+    },
+    {
+      "id": 18,
+      "input": "Je dois acheter des courses après le travail.",
+      "expected_output": "french",
+      "difficulty": "easy",
+      "keywords": ["dois", "acheter", "travail"]
+    },
+    {
+      "id": 19,
+      "input": "Ich muss nach der Arbeit Lebensmittel einkaufen.",
+      "expected_output": "german",
+      "difficulty": "easy",
+      "keywords": ["muss", "arbeit", "einkaufen"]
+    },
+    {
+      "id": 20,
+      "input": "下班后我需要买些食品。",
+      "expected_output": "chinese",
+      "difficulty": "easy",
+      "keywords": ["下班", "需要", "买"]
+    }
+  ]
+}
