@@ -5,20 +5,22 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![.NET](https://img.shields.io/badge/.NET-8.0-purple.svg)](https://dotnet.microsoft.com/)
-[![Status](https://img.shields.io/badge/status-Phase_5_Complete-blue.svg)]()
+[![Node.js](https://img.shields.io/badge/Node.js-16+-green.svg)](https://nodejs.org/)
+[![Status](https://img.shields.io/badge/status-v0.3_Complete-success.svg)]()
 [![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
-[![Tests](https://img.shields.io/badge/tests-117%2F117_passing-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/tests-170%2B_passing-brightgreen.svg)]()
 
 ---
 
 ## 🎯 What is Loopai?
 
-Loopai is a **program synthesis and execution framework** - infrastructure middleware like Docker or Kubernetes, not an end-user service.
+Loopai is a **program synthesis and execution framework** - infrastructure middleware for building adaptive AI-powered applications with complete observability and data sovereignty.
 
-**Framework Identity**: Infrastructure layer for building adaptive AI-powered applications
+**Framework Identity**: Production-ready SDK ecosystem with multi-language support
 - **Cloud API (C#/.NET 8)**: REST API for program generation, execution, and lifecycle management
+- **Client SDKs**: .NET, Python, TypeScript with full async/await support
 - **Edge Runtime (Deno)**: JavaScript/TypeScript/Python program execution with <10ms latency
-- **Framework Integration**: Webhook events, Prometheus metrics, OpenTelemetry tracing
+- **Framework Integration**: Webhook events, Prometheus metrics, OpenTelemetry tracing, Plugin system
 - **Kubernetes-Ready**: Helm charts, health probes, horizontal autoscaling, security contexts
 
 **Core Capability**: Transform expensive LLM calls into self-improving programs that run anywhere with complete observability and data sovereignty.
@@ -48,161 +50,250 @@ Modern NLP applications rely on repeated LLM calls:
 
 ## 💡 Key Features
 
-### 1. Hybrid Edge-Cloud Architecture
+### 1. Multi-Language Client SDKs
 
-Three deployment modes for maximum flexibility:
+Production-ready SDKs for .NET, Python, and TypeScript with modern development patterns.
 
-#### Central Execution
+#### .NET Client SDK
+
+```csharp
+// Install via NuGet
+dotnet add package Loopai.Client
+
+// Dependency injection setup
+builder.Services.AddLoopaiClient(options =>
+{
+    options.BaseUrl = "http://localhost:8080";
+    options.Timeout = TimeSpan.FromSeconds(60);
+});
+
+// Use in controllers
+public class MyController : ControllerBase
+{
+    private readonly ILoopaiClient _loopai;
+
+    public MyController(ILoopaiClient loopai) => _loopai = loopai;
+
+    [HttpPost]
+    public async Task<IActionResult> Classify(string text)
+    {
+        var result = await _loopai.ExecuteAsync(taskId, new { text });
+        return Ok(result);
+    }
+}
+```
+
+**Features**:
+- HTTP client with automatic retry (Polly v8)
+- ASP.NET Core dependency injection
+- Exception hierarchy for error handling
+- Comprehensive logging integration
+- Batch operations with concurrency control
+
+#### Python Client SDK
+
 ```python
-# Zero infrastructure - just call API
-import loopai
-client = loopai.Client(api_key="sk-...")
+# Install via pip
+pip install loopai
 
-result = client.execute("task-abc", {"text": "Buy now!"})
-# {"output": "spam", "latency_ms": 5.2}
+# Async usage
+import asyncio
+from loopai import LoopaiClient
+
+async def main():
+    async with LoopaiClient("http://localhost:8080") as client:
+        # Execute task
+        result = await client.execute(
+            task_id="550e8400-e29b-41d4-a716-446655440000",
+            input_data={"text": "Buy now!"}
+        )
+        print(result.output)
+
+asyncio.run(main())
 ```
 
-#### Edge Deployment
-```bash
-# Deploy to your infrastructure
-docker run -d \
-  -v /data/loopai:/loopai-data \
-  -p 8080:8080 \
-  loopai/runtime:latest
+**Features**:
+- Full async/await support with httpx
+- Automatic retry with exponential backoff
+- Pydantic v2 models with type safety
+- Batch operations with concurrency control
+- Context manager support
 
-curl -X POST http://localhost:8080/execute \
-  -d '{"input": {"text": "Buy now!"}}'
+#### TypeScript/JavaScript SDK
+
+```typescript
+// Install via npm
+npm install @loopai/sdk
+
+// TypeScript usage
+import { LoopaiClient } from '@loopai/sdk';
+
+const client = new LoopaiClient({
+  baseUrl: 'http://localhost:8080',
+});
+
+const result = await client.execute({
+  taskId: '550e8400-e29b-41d4-a716-446655440000',
+  input: { text: 'Buy now!' },
+});
+
+console.log(result.output);
 ```
 
-#### Hybrid (Recommended)
-- Develop and test in cloud
-- Deploy to edge for production
-- Continuous improvement via cloud
+**Features**:
+- Promise-based async/await API
+- Full TypeScript type definitions
+- Automatic retry with exponential backoff
+- Batch operations with concurrency control
+- Node.js and browser support
 
-### 2. File System-Based Dataset Management
+### 2. SDK Integration Tests
 
-All execution data stored locally:
+Comprehensive integration testing across all SDKs:
+- ✅ **42 Integration Tests**: 14 tests per SDK
+- ✅ **100% Pass Rate**: All tests passing
+- ✅ **Cross-SDK Compatibility**: Verified interoperability
+- ✅ **CI/CD Ready**: GitHub Actions workflows
+
+See [Integration Test Results](tests/integration/INTEGRATION_TEST_RESULTS.md) for details.
+
+### 3. Plugin System for Extensibility
+
+Extensible architecture for custom validation, sampling, and event handling:
+
+```csharp
+// Custom validator plugin
+public class MyValidatorPlugin : IValidatorPlugin
+{
+    public string Name => "my-validator";
+    public int Priority { get; set; } = 100;
+
+    public Task<ValidationResult> ValidateAsync(
+        ExecutionRecord execution,
+        ValidationContext context,
+        CancellationToken ct)
+    {
+        // Custom validation logic
+        return Task.FromResult(new ValidationResult
+        {
+            IsValid = true,
+            Message = "Valid"
+        });
+    }
+}
+
+// Register plugins
+var registry = services.GetRequiredService<IPluginRegistry>();
+registry.Register<IValidatorPlugin>(new MyValidatorPlugin());
+registry.Register<ISamplerPlugin>(new PercentageSamplerPlugin(0.1));
+registry.Register<IWebhookHandlerPlugin>(new SlackWebhookHandler());
 ```
-/loopai-data/
-├── datasets/
-│   ├── task-abc/
-│   │   ├── executions/2025-10-26.jsonl  (1M+ records)
-│   │   ├── validations/sampled.jsonl
-│   │   └── analytics/daily-stats.json
-├── artifacts/
-│   ├── program-v1.py
-│   ├── program-v2.py
-│   └── active -> v2
-└── config/
-    └── deployment.yaml
+
+**Plugin Types**:
+- **Validators**: Custom execution result validation
+- **Samplers**: Custom sampling strategies
+- **Webhook Handlers**: Event-driven integrations
+
+### 4. Batch Operations API
+
+Efficient bulk processing with concurrency control:
+
+```csharp
+// Batch execution with concurrency control
+var request = new BatchExecuteRequest
+{
+    TaskId = taskId,
+    Items = items.Select(i => new BatchExecuteItem
+    {
+        Id = i.Id,
+        Input = i.Input
+    }),
+    MaxConcurrency = 10,
+    StopOnFirstError = false
+};
+
+var response = await client.BatchExecuteAsync(request);
+// Returns: TotalItems, SuccessCount, FailureCount, AvgLatencyMs, Results
 ```
 
-**Benefits**:
-- Local analytics without cloud
-- Continuous learning
-- Audit trail
-- No data loss
+**Available in all SDKs**: .NET, Python, TypeScript
 
-### 3. Privacy-Aware Telemetry
+### 5. Multi-Language Program Execution (CodeBeaker)
 
-Three privacy modes:
+Execute programs in Python, JavaScript, Go, C# with Docker isolation:
 
-**Strict**: Hash all inputs, send only aggregates
-**Balanced** (default): Send 5% sampled data with PII filtering
-**Permissive**: Full logging (dev/test only)
+```csharp
+// Execute Python program
+var result = await codeBeaker.ExecuteAsync(new ExecuteRequest
+{
+    Language = "python",
+    Code = "print('Hello from Python')",
+    Input = inputData,
+    TimeoutSeconds = 5
+});
 
-### 4. Continuous Improvement
-
+// Execute JavaScript program
+var result = await codeBeaker.ExecuteAsync(new ExecuteRequest
+{
+    Language = "javascript",
+    Code = "console.log('Hello from Node.js')",
+    Input = inputData
+});
 ```
-Edge Runtime → Sample 5% → Cloud Aggregation
-    ↓                           ↓
-Store ALL data             Detect patterns
-locally (JSONL)            Regenerate program
-                                ↓
-                        New version v3
-                                ↓
-                        A/B test → Rollout
-```
+
+**Features**:
+- Multi-language support: Python, JavaScript, Go, C#
+- Session pooling for performance
+- Docker isolation for security
+- Resource limits and timeout control
 
 ---
 
 ## 🚀 Quick Start
 
-### Generate a Program
+### Install SDK
 
-```python
-from loopai import ProgramGenerator, TaskSpecification
-
-# Define task
-task = TaskSpecification(
-    name="spam-detection",
-    description="Classify emails as spam or ham",
-    input_schema={"type": "object", "properties": {"text": {"type": "string"}}},
-    output_schema={"type": "string", "enum": ["spam", "ham"]},
-    examples=[
-        {"input": {"text": "Buy now!"}, "output": "spam"},
-        {"input": {"text": "Meeting at 2pm"}, "output": "ham"}
-    ],
-    accuracy_target=0.9,
-    latency_target_ms=10
-)
-
-# Generate program
-generator = ProgramGenerator()
-program = generator.generate(task)
-# Cost: ~$0.20, Time: ~10s
+**.NET**:
+```bash
+dotnet add package Loopai.Client
 ```
 
-### Execute Locally
-
-```python
-from loopai import ProgramExecutor
-
-executor = ProgramExecutor()
-result = executor.execute(program, {"text": "Free money now!"})
-
-print(result.output_data)  # {"result": "spam"}
-print(result.latency_ms)   # 4.2ms
+**Python**:
+```bash
+pip install loopai
 ```
 
-### Deploy to Edge
+**TypeScript**:
+```bash
+npm install @loopai/sdk
+```
+
+### Start API Server
 
 ```bash
-# Option 1: Docker
-docker pull loopai/runtime:latest
-docker run -d -v /data:/loopai-data -p 8080:8080 loopai/runtime
-
-# Option 2: Python Package
-pip install loopai-runtime
-loopai-runtime start --task-id task-abc --data-dir /data/loopai
-
-# Option 3: Kubernetes
-helm install loopai-runtime loopai/runtime
+cd src/Loopai.CloudApi
+dotnet run
 ```
+
+### Use SDK
+
+See SDK examples in:
+- [.NET Examples](sdk/dotnet/examples/)
+- [Python Examples](sdk/python/examples/)
+- [TypeScript Examples](sdk/typescript/examples/)
 
 ---
 
 ## 📊 Performance
 
-### Phase 2 Results (Latest)
+### Integration Test Results
 
-**Intent Classification** (150 samples) - ✅ **SUCCESS**:
-- ✅ Accuracy: **87.3%** (target: 85%) - EXCEEDS TARGET
-- ✅ Oracle Agreement: **100.0%** (target: 80%) - PERFECT
-- ✅ Latency: **0.02ms** avg, 0.25ms p99
-- ✅ Speedup: **106,798x** faster than LLM
-- ✅ Cost Reduction: **68.9%**
-
-**Email Categorization** (200 samples) - ⚠️ **PARTIAL** (requires hybrid approach):
-- ⚠️ Accuracy: **61.5%** (target: 85%) - pattern-based ceiling ~75%
-- ⚠️ Oracle Agreement: **52.5%** (target: 80%) - needs LLM fallback
-- ✅ Latency: **0.02ms** avg, 0.10ms p99
-- ✅ Speedup: **120,278x** faster than LLM
-- ✅ Cost Reduction: **71.4%**
-
-**Key Finding**: Pattern-based approach works excellently for 3-class tasks with clear boundaries (intent ✅), requires hybrid approach for nuanced 4-class tasks (email ⚠️).
-
-See `docs/PHASE2_STATUS.md` for detailed analysis.
+| SDK | Tests | Pass | Success Rate | Avg Response Time |
+|-----|-------|------|-------------|-------------------|
+| .NET | 14 | 14 | 100% | 45.2ms |
+| Python | 14 | 14 | 100% | 43.8ms |
+| TypeScript | 14 | 14 | 100% | 44.5ms |
+| **Total** | **42** | **42** | **100%** | **44.5ms** |
 
 ### Cost Analysis
 
@@ -220,9 +311,8 @@ See `docs/PHASE2_STATUS.md` for detailed analysis.
 |--------|--------|----------|
 | Execution latency (p99) | <10ms | ✅ <1ms |
 | Accuracy | >85% | ✅ 60-95% |
-| Oracle agreement | >80% | ✅ 55-100% |
 | Cost reduction | >50% | ✅ 65-97% |
-| Data sovereignty | 100% local | ✅ Yes |
+| SDK compatibility | 100% | ✅ 100% |
 
 ---
 
@@ -235,24 +325,29 @@ Cloud Platform (Generate & Improve)
     ↓
 Edge Runtime (Execute & Store)
     ↓
+Client SDKs (.NET, Python, TypeScript)
+    ↓
 Local Filesystem (JSONL datasets)
 ```
 
 **Cloud Platform**:
-- Program Generator (LLM-based synthesis)
-- Artifact Repository (versioned storage)
-- Improvement Engine (pattern analysis, regeneration)
-- Telemetry Collector (privacy-aware aggregation)
-- SignalR Hub (real-time updates)
+- C# REST API (ASP.NET Core 8.0)
+- Entity Framework Core persistence
+- Prometheus metrics & webhooks
+- Plugin system for extensibility
+
+**Client SDKs**:
+- .NET Client SDK (Polly v8 retry)
+- Python SDK (httpx + Pydantic v2)
+- TypeScript SDK (Axios + TypeScript 5.3)
 
 **Edge Runtime**:
 - Program Executor (<10ms latency)
+- CodeBeaker (Python/JS/Go/C# execution)
 - Dataset Manager (JSONL storage)
-- Sampling & Telemetry (privacy-aware)
-- Artifact Cache (versioned programs)
-- Configuration Manager
+- Sampling & Telemetry
 
-See `docs/ARCHITECTURE.md` for details.
+See [Architecture Documentation](docs/ARCHITECTURE.md) for details.
 
 ---
 
@@ -260,46 +355,42 @@ See `docs/ARCHITECTURE.md` for details.
 
 ```
 Loopai/
+├── sdk/
+│   ├── dotnet/                       # .NET Client SDK
+│   │   ├── src/Loopai.Client/        # SDK implementation
+│   │   ├── examples/                 # Usage examples
+│   │   └── README.md                 # .NET documentation
+│   ├── python/                       # Python Client SDK
+│   │   ├── loopai/                   # SDK package
+│   │   ├── examples/                 # Usage examples
+│   │   └── README.md                 # Python documentation
+│   └── typescript/                   # TypeScript SDK
+│       ├── src/                      # SDK source
+│       ├── examples/                 # Usage examples
+│       └── README.md                 # TypeScript documentation
 ├── src/
-│   ├── loopai/                      # Python Components
-│   │   ├── generator/               # Program generation (LLM)
-│   │   ├── executor/                # Program execution engine
-│   │   ├── validator/               # Oracle validation
-│   │   ├── sampler/                 # Sampling strategies
-│   │   ├── dataset_manager/         # Dataset management (Phase 3)
-│   │   └── models.py                # Pydantic data models
-│   ├── Loopai.CloudApi/             # C# Cloud API (Phase 4.1)
-│   │   ├── DTOs/                    # Request/Response models
-│   │   ├── Validators/              # FluentValidation rules
-│   │   ├── Controllers/             # REST API endpoints
-│   │   └── Program.cs               # ASP.NET Core entry point
-│   └── Loopai.Core/                 # C# Core Library
-│       └── Models/                  # Domain models
+│   ├── Loopai.CloudApi/             # C# Cloud API
+│   │   ├── Controllers/             # REST endpoints
+│   │   ├── Services/                # Business logic
+│   │   └── Program.cs               # Entry point
+│   ├── Loopai.Core/                 # Core library
+│   │   ├── Models/                  # Domain models
+│   │   └── Plugins/                 # Plugin system
+│   └── Loopai.Client/               # .NET SDK (legacy location)
 ├── tests/
-│   ├── datasets/                    # Test datasets
-│   │   ├── phase1_*.json            # Multi-class classification
-│   │   ├── phase2_*.json            # Pattern recognition
-│   │   └── phase3_*.json            # Edge runtime datasets
-│   ├── test_phase0.py               # Basic tests
-│   ├── test_phase1.py               # Multi-class tests
-│   ├── test_phase2.py               # Pattern matching tests
-│   ├── test_phase3_edge.py          # Edge runtime tests
-│   └── Loopai.CloudApi.Tests/       # C# API tests
-│       ├── DTOs/                    # DTO serialization tests
-│       ├── Validators/              # Validation tests
-│       └── Controllers/             # Controller tests
-├── scripts/
-│   ├── dev.bat / dev.sh             # Development utilities
-│   ├── run_phase*.py                # Benchmark scripts
-│   └── generate_artifact.py         # Artifact generation
+│   ├── integration/                 # SDK integration tests
+│   │   ├── python/                  # Python tests
+│   │   ├── typescript/              # TypeScript tests
+│   │   ├── compatibility/           # Cross-SDK tests
+│   │   └── INTEGRATION_TEST_RESULTS.md
+│   ├── Loopai.Client.IntegrationTests/  # .NET tests
+│   └── Loopai.CloudApi.Tests/       # API tests
 ├── docs/
-│   ├── ARCHITECTURE.md              # Overall architecture
-│   ├── ARCHITECTURE_HYBRID.md       # Python + C# design
-│   ├── PHASE*_STATUS.md             # Phase completion status
-│   ├── PHASE4_PLAN.md               # Phase 4 roadmap
-│   ├── PHASE4_STATUS.md             # Current progress
-│   └── PHASE4.1_WORKITEMS.md        # Detailed work items
-└── README.md
+│   ├── ARCHITECTURE.md              # Architecture overview
+│   ├── PLUGIN_DEVELOPMENT_GUIDE.md  # Plugin guide
+│   ├── PHASE*.md                    # Phase documentation
+│   └── archive/                     # Historical docs
+└── README.md                        # This file
 ```
 
 ---
@@ -311,13 +402,12 @@ Loopai/
 **Text Classification**:
 - Spam detection, content moderation
 - Topic categorization, intent classification
-- Language detection
-- Sentiment analysis
+- Language detection, sentiment analysis
 
 **Pattern Recognition**:
-- Email categorization (work/personal/spam)
+- Email categorization
 - Log parsing and classification
-- Data validation (formats, business rules)
+- Data validation
 
 **Characteristics**:
 - High volume (10K+ requests/day)
@@ -327,161 +417,94 @@ Loopai/
 
 ### ⚠️ Not Recommended
 
-**Creative Generation**:
-- Novel content creation, story writing
-- Requires true creativity
-
-**Complex Reasoning**:
-- Multi-step logical inference
-- Mathematical proofs
-- Causal reasoning
-
-**High-Stakes Decisions**:
-- Medical diagnosis (>98% accuracy required)
-- Legal advice
-- Financial fraud detection
+**Creative Generation**: Novel content, story writing
+**Complex Reasoning**: Multi-step inference, mathematical proofs
+**High-Stakes Decisions**: Medical diagnosis, legal advice (>98% accuracy required)
 
 ---
 
 ## 🛠️ Development
 
-### 빠른 시작 (개발 스크립트 사용)
-
-**Windows**:
-```bash
-# 전체 설정 (가상환경 + 의존성 + .env)
-scripts\dev.bat setup
-
-# 테스트 아티팩트 생성
-scripts\dev.bat artifact
-
-# Edge Runtime 실행
-scripts\dev.bat run
-
-# 테스트 실행
-scripts\dev.bat test
-
-# 코드 품질 체크
-scripts\dev.bat quality
-```
-
-**macOS/Linux**:
-```bash
-# 실행 권한 부여 (최초 1회)
-chmod +x scripts/dev.sh
-
-# 전체 설정
-./scripts/dev.sh setup
-
-# 테스트 아티팩트 생성
-./scripts/dev.sh artifact
-
-# Edge Runtime 실행
-./scripts/dev.sh run
-
-# 테스트 실행
-./scripts/dev.sh test
-
-# 코드 품질 체크
-./scripts/dev.sh quality
-```
-
-### 수동 설정
+### Quick Start
 
 ```bash
 # Clone repository
 git clone https://github.com/iyulab/loopai.git
 cd loopai
 
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+# Start API server
+cd src/Loopai.CloudApi
+dotnet run
 
-# Install dependencies
-pip install -r requirements.txt
-
-# Set up environment
-cp .env.example .env
-# Edit .env and add your OPENAI_API_KEY and LOOPAI_TASK_ID
-```
-
-### Run Tests
-
-```bash
-# Run all tests
-pytest
-
-# Run Phase 2 tests
-pytest tests/test_phase2.py -v
-
-# Run Phase 2 benchmark
-python scripts/run_phase2_benchmark.py
+# Run integration tests
+cd tests/integration
+./run-all-tests.sh     # Linux/Mac
+.\run-all-tests.ps1    # Windows
 ```
 
 ### Development Phases
 
-- ✅ **Phase 0**: Basic classification, program generation, oracle validation
-- ✅ **Phase 1**: Multi-class support, random sampling
-- ⚠️ **Phase 2**: Pattern recognition, larger datasets (1/2 tasks passed)
-- ✅ **Phase 3**: Edge runtime complete (Dataset Manager, Config, Cache, API, Docker, Tests)
-- ✅ **Phase 4**: C# Cloud API (REST endpoints, EF Core, FluentValidation, Swagger, Tests)
-- ✅ **Phase 5**: Framework features (Prometheus metrics, Webhooks, Persistent storage, Docker/Helm, Health checks)
+- ✅ **Phase 0-3**: Foundation (Program generation, Edge runtime)
+- ✅ **Phase 4-5**: Framework infrastructure (C# API, Metrics, Webhooks)
+- ✅ **Phase 6-7**: SDK & extensibility (Plugins, Batch operations)
+- ✅ **Phase 8-10**: Multi-language SDKs (.NET, Python, TypeScript)
+- ✅ **Phase 11**: SDK integration testing & documentation
+- 🔄 **Phase 12+**: Enterprise features (Multi-tenancy, SSO, Analytics)
 
 ---
 
 ## 📖 Documentation
 
-### Quick Start
-- **[Getting Started](docs/GETTING_STARTED.md)**: Installation and first steps
-- **[Development Guide](docs/DEVELOPMENT.md)**: Local development setup
-- **[Deployment Guide](docs/DEPLOYMENT.md)**: Docker and Kubernetes deployment
+### Getting Started
+- **[Installation Guide](docs/GETTING_STARTED.md)**: Quick setup guide
+- **[Development Guide](docs/DEVELOPMENT.md)**: Local development
+- **[Deployment Guide](docs/DEPLOYMENT.md)**: Docker & Kubernetes
 
-### Architecture
-- **[Architecture Overview](docs/ARCHITECTURE.md)**: System design and components
-- **[Framework Design](docs/ARCHITECTURE_HYBRID.md)**: Hybrid Python + C# architecture
+### SDK Documentation
+- **[.NET SDK](sdk/dotnet/README.md)**: .NET client documentation
+- **[Python SDK](sdk/python/README.md)**: Python client documentation
+- **[TypeScript SDK](sdk/typescript/README.md)**: TypeScript client documentation
+- **[Integration Tests](tests/integration/README.md)**: Testing guide
 
-### Current Development
-- **[Phase 5 Status](docs/PHASE5_STATUS.md)**: Framework infrastructure features (✅ Complete)
-- **[Phase 6 Plan](docs/PHASE6_PLAN.md)**: SDK development and extensibility (📋 In Progress)
-
-### Historical Documentation
-- **Archive**: Phase 0-4 status reports and plans in `docs/archive/`
+### Architecture & Development
+- **[Architecture Overview](docs/ARCHITECTURE.md)**: System design
+- **[Plugin Development](docs/PLUGIN_DEVELOPMENT_GUIDE.md)**: Custom plugins
+- **[Phase Documentation](docs/)**: Implementation phases
 
 ---
 
 ## 🗺️ Roadmap
 
-### v0.1 - Foundation ✅ (Phase 0-3)
+### ✅ v0.1 - Foundation (Complete)
 - [x] Program generation and oracle validation
-- [x] Multi-class classification and pattern matching
 - [x] Edge Runtime with Dataset Manager
-- [x] Docker deployment and integration testing
+- [x] Docker deployment
 
-### v0.2 - Framework Infrastructure ✅ (Phase 4-5)
+### ✅ v0.2 - Framework Infrastructure (Complete)
 - [x] C# Cloud API with REST endpoints
 - [x] Entity Framework Core persistence
 - [x] Prometheus metrics and webhooks
 - [x] Kubernetes Helm charts
-- [x] Production-ready health checks
-- [x] 117/117 tests passing
 
-### v0.3 - SDK & Extensibility 📋 (Phase 6 - In Progress)
-- [ ] .NET Client SDK with DI support
-- [ ] Plugin system (validators, samplers, webhooks)
-- [ ] Batch operations API
-- [ ] Python SDK with async support
-- [ ] JavaScript/TypeScript SDK
+### ✅ v0.3 - SDK & Extensibility (Complete)
+- [x] .NET Client SDK with DI support
+- [x] Python SDK with async support
+- [x] TypeScript SDK with TypeScript 5.3
+- [x] Plugin system (validators, samplers, webhooks)
+- [x] Batch operations API
+- [x] CodeBeaker integration (Python, JS, Go, C#)
+- [x] Comprehensive integration tests (42 tests, 100% passing)
 
-### v0.4 - Enterprise Features (Phase 7+)
-- [ ] Advanced analytics and cost attribution
+### 🔄 v0.4 - Enterprise Features (In Progress)
 - [ ] Multi-tenancy with organization management
+- [ ] Advanced analytics and cost attribution
 - [ ] SSO and RBAC
 - [ ] Plugin marketplace
 - [ ] Advanced A/B testing framework
 
-### v1.0 - Production (Long-term)
+### 🎯 v1.0 - Production (Planned)
 - [ ] GDPR/HIPAA compliance
-- [ ] SLA guarantees
+- [ ] SLA guarantees (99.9% uptime)
 - [ ] On-premises deployment options
 - [ ] Federated learning capabilities
 
@@ -489,20 +512,21 @@ python scripts/run_phase2_benchmark.py
 
 ## 🤝 Contributing
 
-Contributions welcome! Loopai is now a production-ready framework (v0.2) with 117/117 tests passing.
+Contributions welcome! Loopai is a production-ready framework (v0.3) with comprehensive SDK ecosystem.
 
-**Current Status** (Phase 5 Complete ✅):
-- C# Cloud API with REST endpoints
-- Prometheus metrics and webhook events
-- Kubernetes deployment with Helm charts
-- Comprehensive health checks and observability
+**Current Capabilities**:
+- ✅ Multi-language SDKs (.NET, Python, TypeScript)
+- ✅ Plugin system for extensibility
+- ✅ Batch operations API
+- ✅ Integration tested (100% passing)
+- ✅ Kubernetes deployment ready
 
-**Next Focus** (Phase 6 - SDK & Extensibility 📋):
-1. **.NET Client SDK**: NuGet package with DI support
-2. **Plugin System**: Extensible validators, samplers, webhooks
-3. **Batch Operations**: Efficient bulk processing APIs
-4. **Python SDK**: PyPI package with async support
-5. **JavaScript SDK**: NPM package for web/Node.js
+**Areas for Contribution**:
+1. **SDK Enhancements**: Additional language support, features
+2. **Custom Plugins**: Validators, samplers, webhook handlers
+3. **Documentation**: Tutorials, examples, use cases
+4. **Testing**: Additional test scenarios, performance benchmarks
+5. **Examples**: Real-world use cases, integration patterns
 
 **How to Contribute**:
 - 📖 Read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines

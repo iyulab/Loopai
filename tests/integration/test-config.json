@@ -1,0 +1,51 @@
+{
+  "baseUrl": "http://localhost:8080",
+  "timeout": 30000,
+  "retries": 3,
+  "testData": {
+    "taskName": "integration-test-spam-classifier",
+    "taskDescription": "Integration test task for spam classification",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": ["text"]
+    },
+    "outputSchema": {
+      "type": "string",
+      "enum": ["spam", "not_spam"]
+    },
+    "accuracyTarget": 0.95,
+    "latencyTargetMs": 50,
+    "samplingRate": 0.1,
+    "sampleInputs": [
+      { "text": "Buy now for free money!" },
+      { "text": "Meeting tomorrow at 2pm" },
+      { "text": "URGENT: Click here NOW!!!" },
+      { "text": "Can we schedule a call next week?" },
+      { "text": "FREE PRIZES! CLICK NOW!!!" }
+    ],
+    "expectedOutputs": {
+      "Buy now for free money!": "spam",
+      "Meeting tomorrow at 2pm": "not_spam",
+      "URGENT: Click here NOW!!!": "spam",
+      "Can we schedule a call next week?": "not_spam",
+      "FREE PRIZES! CLICK NOW!!!": "spam"
+    }
+  },
+  "validation": {
+    "checkOutputType": true,
+    "checkLatency": true,
+    "maxLatencyMs": 1000,
+    "checkSampling": true,
+    "checkTimestamps": true
+  },
+  "batch": {
+    "defaultConcurrency": 10,
+    "maxItems": 100,
+    "stopOnFirstError": false
+  }
+}

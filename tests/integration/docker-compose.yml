@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # SQL Server for Loopai API
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: loopai-test-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Loopai@Test123
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Loopai@Test123 -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+  # Loopai Cloud API
+  loopai-api:
+    build:
+      context: ../../
+      dockerfile: src/Loopai.CloudApi/Dockerfile
+    container_name: loopai-test-api
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=LoopaiTest;User Id=sa;Password=Loopai@Test123;TrustServerCertificate=True;
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: curl --fail http://localhost:8080/health || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  sqlserver-data:
+    driver: local

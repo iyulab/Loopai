@@ -1,6 +1,9 @@
 # Loopai Documentation
 
-Complete documentation for the Loopai program synthesis and execution framework.
+**Version**: v0.3
+**Last Updated**: 2025-10-27
+
+Welcome to the Loopai documentation! This directory contains comprehensive guides for using, developing, and deploying the Loopai framework.
 
 ---
 
@@ -8,41 +11,68 @@ Complete documentation for the Loopai program synthesis and execution framework.
 
 ### Getting Started
 
+**New to Loopai?** Start here:
+
 | Document | Description | Status |
 |----------|-------------|--------|
-| [Getting Started](GETTING_STARTED.md) | Installation, first steps, and basic usage | ✅ Current |
-| [Development Guide](DEVELOPMENT.md) | Local development environment setup | ✅ Current |
+| [Getting Started](GETTING_STARTED.md) | Installation and first steps | ✅ Current |
+| [Development Guide](DEVELOPMENT.md) | Local development setup | ✅ Current |
 | [Deployment Guide](DEPLOYMENT.md) | Docker and Kubernetes deployment | ✅ Current |
 
 ### Architecture & Design
 
-| Document | Description | Status |
-|----------|-------------|--------|
-| [Architecture Overview](ARCHITECTURE.md) | System design, components, and data flow | ✅ Current |
-| [Hybrid Architecture](ARCHITECTURE_HYBRID.md) | Python + C# framework design | ✅ Current |
-
-### Project Status
+Understanding the system:
 
 | Document | Description | Status |
 |----------|-------------|--------|
-| [Phase 5 Status](PHASE5_STATUS.md) | Framework infrastructure features (Complete) | ✅ v0.2 |
-| [Phase 6 Plan](PHASE6_PLAN.md) | SDK development and extensibility | 📋 In Progress |
+| [Architecture Overview](ARCHITECTURE.md) | System design and components | ✅ Current |
+| [Hybrid Architecture](ARCHITECTURE_HYBRID.md) | Python + C# integration | ✅ Current |
+
+### SDK Documentation
+
+Client SDK guides:
+
+| SDK | Documentation | Status |
+|-----|---------------|--------|
+| .NET | [.NET SDK](../sdk/dotnet/README.md) | ✅ v0.1.0 |
+| Python | [Python SDK](../sdk/python/README.md) | ✅ v0.1.0 |
+| TypeScript | [TypeScript SDK](../sdk/typescript/README.md) | ✅ v0.1.0 |
+| Integration Tests | [Test Guide](../tests/integration/README.md) | ✅ Complete |
+
+### Development Guides
+
+Advanced development topics:
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| [Plugin Development](PLUGIN_DEVELOPMENT_GUIDE.md) | Creating custom plugins | ✅ Current |
+| [Phase 6 Plan](PHASE6_PLAN.md) | SDK and extensibility planning | ✅ Complete |
+
+### Phase Documentation
+
+#### Current Phase (Complete)
+| Document | Description | Status |
+|----------|-------------|--------|
+| [Phase 10-11: SDK Complete](PHASE10-11_SDK_COMPLETE.md) | Multi-language SDKs and integration testing | ✅ v0.3 |
+
+#### Recent Phases
+| Document | Description | Status |
+|----------|-------------|--------|
+| [Phase 9: Python SDK](PHASE9_PYTHON_SDK_COMPLETE.md) | Python Client SDK | ✅ Complete |
+| [Phase 8: .NET SDK](PHASE8_COMPLETE.md) | .NET Client SDK | ✅ Complete |
+| [Phase 8.1: Integration Tests](PHASE8.1_INTEGRATION_TESTS_COMPLETE.md) | .NET integration testing | ✅ Complete |
+| [Phase 8 Status](PHASE8_STATUS.md) | .NET SDK details | ✅ Complete |
+| [Phase 7.2 Status](PHASE7.2_STATUS.md) | Batch API optimization | ✅ Complete |
+| [Phase 7.1 Status](PHASE7.1_STATUS.md) | CodeBeaker integration | ✅ Complete |
+| [Phase 6.2 Status](PHASE6.2_STATUS.md) | Plugin system | ✅ Complete |
+| [Phase 6.1 Status](PHASE6.1_STATUS.md) | .NET Client SDK | ✅ Complete |
+| [Phase 5 Status](PHASE5_STATUS.md) | Framework infrastructure | ✅ Complete |
 
 ### Historical Documentation
 
-Archived documentation for completed phases:
-
-| Document | Description | Phase |
-|----------|-------------|-------|
-| [Phase 0 Status](archive/PHASE0_STATUS.md) | Basic classification and validation | Phase 0 ✅ |
-| [Phase 1 Status](archive/PHASE1_STATUS.md) | Multi-class support | Phase 1 ✅ |
-| [Phase 2 Status](archive/PHASE2_STATUS.md) | Pattern recognition | Phase 2 ⚠️ |
-| [Phase 3 Plan](archive/PHASE3_PLAN.md) | Edge runtime planning | Phase 3 📋 |
-| [Phase 3 Status](archive/PHASE3_STATUS.md) | Edge runtime implementation | Phase 3 ✅ |
-| [Phase 4 Plan](archive/PHASE4_PLAN.md) | Hybrid architecture planning | Phase 4 📋 |
-| [Phase 4 Status](archive/PHASE4_STATUS.md) | C# Cloud API implementation | Phase 4 ✅ |
-| [Phase 4.1 Work Items](archive/PHASE4.1_WORKITEMS.md) | Detailed API work items | Phase 4.1 ✅ |
-| [Phase 4 Transition](archive/PHASE4_TRANSITION_SUMMARY.md) | Transition summary | Phase 4 📝 |
+See [archive/](archive/) for earlier phase documentation:
+- Phase 0-4 planning and status documents
+- Research notes and legacy task lists
 
 ---
 
@@ -88,18 +118,21 @@ Archived documentation for completed phases:
 
 ---
 
-## 🎯 Current Version: v0.2
+## 🎯 Current Version: v0.3
 
-**Status**: Production-ready framework with complete infrastructure
+**Status**: Production-ready SDK ecosystem with comprehensive testing
 
 **Highlights**:
-- ✅ 117/117 tests passing
+- ✅ 170+ tests passing (42 integration, 128+ unit)
+- ✅ Multi-language SDKs (.NET, Python, TypeScript)
+- ✅ 100% cross-SDK compatibility verified
+- ✅ Plugin system for extensibility
+- ✅ Batch operations API
+- ✅ CodeBeaker multi-language execution
 - ✅ Kubernetes-ready with Helm charts
-- ✅ Prometheus metrics and OpenTelemetry
-- ✅ Webhook event system
-- ✅ Production health checks
+- ✅ CI/CD integration ready
 
-**Next**: v0.3 - SDK & Extensibility (Phase 6)
+**Next**: v0.4 - Enterprise Features (Multi-tenancy, SSO, Advanced Analytics)
 
 ---
 
@@ -200,6 +233,6 @@ Completed phase documents moved to `archive/`:
 
 ---
 
-**Last Updated**: October 26, 2025
-**Version**: v0.2 (Phase 5 Complete)
-**Next Release**: v0.3 (Phase 6 - SDK Development)
+**Last Updated**: October 27, 2025
+**Version**: v0.3 (Phase 10-11 Complete)
+**Next Release**: v0.4 (Enterprise Features)

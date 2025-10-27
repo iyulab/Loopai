@@ -1,0 +1,281 @@
+name: SDK Integration Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'sdk/**'
+      - 'src/Loopai.CloudApi/**'
+      - 'src/Loopai.Core/**'
+      - 'tests/integration/**'
+      - 'tests/Loopai.Client.IntegrationTests/**'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'sdk/**'
+      - 'src/Loopai.CloudApi/**'
+      - 'src/Loopai.Core/**'
+      - 'tests/integration/**'
+      - 'tests/Loopai.Client.IntegrationTests/**'
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  PYTHON_VERSION: '3.9'
+  NODE_VERSION: '16'
+  API_BASE_URL: 'http://localhost:8080'
+
+jobs:
+  # Start API Server
+  setup-api:
+    runs-on: ubuntu-latest
+    outputs:
+      api-ready: ${{ steps.wait-for-api.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Setup SQL Server
+        run: |
+          docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Loopai@Test123" \
+            -p 1433:1433 --name sqlserver -d \
+            mcr.microsoft.com/mssql/server:2022-latest
+
+      - name: Wait for SQL Server
+        run: |
+          for i in {1..30}; do
+            if docker exec sqlserver /opt/mssql-tools/bin/sqlcmd \
+              -S localhost -U sa -P "Loopai@Test123" -Q "SELECT 1" > /dev/null 2>&1; then
+              echo "SQL Server is ready"
+              break
+            fi
+            echo "Waiting for SQL Server..."
+            sleep 2
+          done
+
+      - name: Restore dependencies
+        run: |
+          cd src/Loopai.CloudApi
+          dotnet restore
+
+      - name: Run migrations
+        run: |
+          cd src/Loopai.CloudApi
+          export ConnectionStrings__DefaultConnection="Server=localhost;Database=LoopaiTest;User Id=sa;Password=Loopai@Test123;TrustServerCertificate=True;"
+          dotnet ef database update
+
+      - name: Start API Server
+        run: |
+          cd src/Loopai.CloudApi
+          export ConnectionStrings__DefaultConnection="Server=localhost;Database=LoopaiTest;User Id=sa;Password=Loopai@Test123;TrustServerCertificate=True;"
+          dotnet run &
+          echo $! > api.pid
+
+      - name: Wait for API
+        id: wait-for-api
+        run: |
+          for i in {1..30}; do
+            if curl -s ${{ env.API_BASE_URL }}/health > /dev/null; then
+              echo "API is ready"
+              echo "ready=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+            echo "Waiting for API..."
+            sleep 2
+          done
+          echo "API failed to start"
+          echo "ready=false" >> $GITHUB_OUTPUT
+          exit 1
+
+  # .NET SDK Integration Tests
+  dotnet-integration-tests:
+    runs-on: ubuntu-latest
+    needs: setup-api
+    if: needs.setup-api.outputs.api-ready == 'true'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore dependencies
+        run: |
+          cd tests/Loopai.Client.IntegrationTests
+          dotnet restore
+
+      - name: Build
+        run: |
+          cd tests/Loopai.Client.IntegrationTests
+          dotnet build --no-restore
+
+      - name: Run tests
+        run: |
+          cd tests/Loopai.Client.IntegrationTests
+          dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: dotnet-test-results
+          path: tests/Loopai.Client.IntegrationTests/TestResults/*.trx
+
+  # Python SDK Integration Tests
+  python-integration-tests:
+    runs-on: ubuntu-latest
+    needs: setup-api
+    if: needs.setup-api.outputs.api-ready == 'true'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install SDK
+        run: |
+          cd sdk/python
+          pip install -e .
+
+      - name: Install test dependencies
+        run: |
+          cd tests/integration/python
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          cd tests/integration/python
+          pytest -v --junitxml=test-results.xml --cov=loopai --cov-report=xml
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-test-results
+          path: tests/integration/python/test-results.xml
+
+      - name: Upload coverage
+        if: always()
+        uses: codecov/codecov-action@v3
+        with:
+          files: tests/integration/python/coverage.xml
+          flags: python-sdk
+
+  # TypeScript SDK Integration Tests
+  typescript-integration-tests:
+    runs-on: ubuntu-latest
+    needs: setup-api
+    if: needs.setup-api.outputs.api-ready == 'true'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Build SDK
+        run: |
+          cd sdk/typescript
+          npm install
+          npm run build
+
+      - name: Install test dependencies
+        run: |
+          cd tests/integration/typescript
+          npm install
+
+      - name: Run tests
+        run: |
+          cd tests/integration/typescript
+          npm test -- --coverage --ci --reporters=default --reporters=jest-junit
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: typescript-test-results
+          path: tests/integration/typescript/junit.xml
+
+      - name: Upload coverage
+        if: always()
+        uses: codecov/codecov-action@v3
+        with:
+          files: tests/integration/typescript/coverage/coverage-final.json
+          flags: typescript-sdk
+
+  # Cross-SDK Compatibility Tests
+  compatibility-tests:
+    runs-on: ubuntu-latest
+    needs: [dotnet-integration-tests, python-integration-tests, typescript-integration-tests]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Build all SDKs
+        run: |
+          cd sdk/dotnet && dotnet build
+          cd ../python && pip install -e .
+          cd ../typescript && npm install && npm run build
+
+      - name: Run compatibility tests
+        run: |
+          cd tests/integration/compatibility
+          python test-cross-sdk.py
+
+      - name: Upload compatibility report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: compatibility-report
+          path: tests/integration/compatibility/report.json
+
+  # Test Summary
+  test-summary:
+    runs-on: ubuntu-latest
+    needs: [dotnet-integration-tests, python-integration-tests, typescript-integration-tests, compatibility-tests]
+    if: always()
+    steps:
+      - name: Download all test results
+        uses: actions/download-artifact@v3
+
+      - name: Generate summary
+        run: |
+          echo "# SDK Integration Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| SDK | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| .NET | ${{ needs.dotnet-integration-tests.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Python | ${{ needs.python-integration-tests.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| TypeScript | ${{ needs.typescript-integration-tests.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Compatibility | ${{ needs.compatibility-tests.result == 'success' && '✅ Passed' || '⚠️ Issues' }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check overall status
+        if: |
+          needs.dotnet-integration-tests.result != 'success' ||
+          needs.python-integration-tests.result != 'success' ||
+          needs.typescript-integration-tests.result != 'success'
+        run: exit 1

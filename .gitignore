@@ -134,6 +134,27 @@ ScaffoldingReadMe.txt
 *.nuget.props
 *.nuget.targets
 
+# Exception: Keep local NuGet packages for Phase 6
+!nupkg/*.nupkg
+
+# Python build artifacts
+*.whl
+*.tar.gz
+dist/
+*.egg
+build/
+
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Deprecated Python client (superseded by sdk/python/)
+src/loopai_client/
+tests/loopai_client_tests/
+examples/python_client/
+
+# Coverage HTML reports
+htmlcov/
+
+claudedocs/
+nupkg/

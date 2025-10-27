@@ -1,0 +1,6 @@
+@Loopai.Examples.AspNetCore_HostAddress = http://localhost:5159
+
+GET {{Loopai.Examples.AspNetCore_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
