@@ -431,83 +431,84 @@ python scripts/run_phase2_benchmark.py
 
 ## 📖 Documentation
 
-### Architecture & Design
-- **[Hybrid Architecture](docs/ARCHITECTURE_HYBRID.md)**: Python + C# hybrid architecture design and roadmap
-- **[Architecture Overview](docs/ARCHITECTURE.md)**: System architecture fundamentals
-- **[Getting Started](docs/GETTING_STARTED.md)**: Step-by-step guide
+### Quick Start
+- **[Getting Started](docs/GETTING_STARTED.md)**: Installation and first steps
+- **[Development Guide](docs/DEVELOPMENT.md)**: Local development setup
+- **[Deployment Guide](docs/DEPLOYMENT.md)**: Docker and Kubernetes deployment
 
-### Development & Deployment
-- **[Development Guide](docs/DEVELOPMENT.md)**: Local development environment setup
-- **[Deployment Guide](docs/DEPLOYMENT.md)**: Docker deployment instructions
+### Architecture
+- **[Architecture Overview](docs/ARCHITECTURE.md)**: System design and components
+- **[Framework Design](docs/ARCHITECTURE_HYBRID.md)**: Hybrid Python + C# architecture
 
-### Project Status
-- **[Phase 3 Status](docs/PHASE3_STATUS.md)**: Edge runtime implementation (✅ Complete)
-- **[Phase 4 Plan](docs/PHASE4_PLAN.md)**: Hybrid architecture implementation roadmap (✅ Ready)
-- **[Phase 4.1 Work Items](docs/PHASE4.1_WORKITEMS.md)**: Detailed C# Cloud API implementation tasks
+### Current Development
+- **[Phase 5 Status](docs/PHASE5_STATUS.md)**: Framework infrastructure features (✅ Complete)
+- **[Phase 6 Plan](docs/PHASE6_PLAN.md)**: SDK development and extensibility (📋 In Progress)
 
 ### Historical Documentation
-- Archived Phase 0-2 status reports available in `docs/archive/`
+- **Archive**: Phase 0-4 status reports and plans in `docs/archive/`
 
 ---
 
 ## 🗺️ Roadmap
 
-### v0.1 (Completed - Alpha)
-- [x] Basic program generation (rule-based)
-- [x] LLM oracle validation
-- [x] Random sampling (1-20%)
-- [x] Multi-class classification
-- [x] Pattern matching support
-- [x] Dataset Manager (JSONL logging, analytics, retention)
-- [x] Configuration Manager (YAML config, env vars)
-- [x] Artifact Cache (version management)
-- [x] Edge Runtime API (FastAPI with /execute, /health, /metrics)
-- [x] Docker deployment (multi-stage builds, Docker Compose)
-- [x] Integration testing (53 tests, 100% passing)
-- [x] Phase 3 complete - production-ready Edge Runtime
+### v0.1 - Foundation ✅ (Phase 0-3)
+- [x] Program generation and oracle validation
+- [x] Multi-class classification and pattern matching
+- [x] Edge Runtime with Dataset Manager
+- [x] Docker deployment and integration testing
 
-### v0.2 (Next - Hybrid Architecture)
-**Phase 4: Python + C# Hybrid Implementation** (12-16 weeks)
-- [ ] Phase 4.1: C# Cloud API (ASP.NET Core, 100K+ req/sec target)
-- [ ] Phase 4.2: Python-C# Integration (gRPC/REST API bridges)
-- [ ] Phase 4.3: SignalR Real-time Hub (live monitoring, artifact updates)
-- [ ] Phase 4.4: C# Edge Runtime (optional enterprise deployment)
-- [ ] Phase 4.5: Performance Optimization (caching, load testing)
-- [ ] Kubernetes deployment with hybrid services
-- [ ] Privacy-aware telemetry system
-- [ ] Improved email categorization (hybrid pattern + LLM approach)
+### v0.2 - Framework Infrastructure ✅ (Phase 4-5)
+- [x] C# Cloud API with REST endpoints
+- [x] Entity Framework Core persistence
+- [x] Prometheus metrics and webhooks
+- [x] Kubernetes Helm charts
+- [x] Production-ready health checks
+- [x] 117/117 tests passing
 
-### v0.3
-- [ ] Advanced sampling (uncertainty, stratified)
-- [ ] A/B testing framework
-- [ ] Multi-language support (C#, Java)
-- [ ] Federated learning
+### v0.3 - SDK & Extensibility 📋 (Phase 6 - In Progress)
+- [ ] .NET Client SDK with DI support
+- [ ] Plugin system (validators, samplers, webhooks)
+- [ ] Batch operations API
+- [ ] Python SDK with async support
+- [ ] JavaScript/TypeScript SDK
 
-### v1.0 (Production)
-- [ ] Enterprise features (multi-tenancy, SSO)
-- [ ] On-premises deployment
+### v0.4 - Enterprise Features (Phase 7+)
+- [ ] Advanced analytics and cost attribution
+- [ ] Multi-tenancy with organization management
+- [ ] SSO and RBAC
+- [ ] Plugin marketplace
+- [ ] Advanced A/B testing framework
+
+### v1.0 - Production (Long-term)
 - [ ] GDPR/HIPAA compliance
 - [ ] SLA guarantees
+- [ ] On-premises deployment options
+- [ ] Federated learning capabilities
 
 ---
 
 ## 🤝 Contributing
 
-Contributions welcome! Phase 3 (Edge Runtime) is now complete - moving to v0.2 development.
+Contributions welcome! Loopai is now a production-ready framework (v0.2) with 117/117 tests passing.
 
-**Phase 3 Completed** ✅:
-- Edge Runtime with FastAPI (53 tests passing)
-- Docker deployment with multi-stage builds
-- Complete integration testing and documentation
+**Current Status** (Phase 5 Complete ✅):
+- C# Cloud API with REST endpoints
+- Prometheus metrics and webhook events
+- Kubernetes deployment with Helm charts
+- Comprehensive health checks and observability
 
-**Next Focus (v0.2 - Hybrid Architecture)**:
-1. **Phase 4.1**: C# Cloud API with ASP.NET Core (100K+ req/sec target)
-2. **Phase 4.2**: Python-C# integration layer (gRPC/REST bridges)
-3. **Phase 4.3**: SignalR real-time hub for monitoring
-4. **Phase 4.4**: Optional C# Edge Runtime for enterprise
-5. **Phase 4.5**: Performance optimization and load testing
+**Next Focus** (Phase 6 - SDK & Extensibility 📋):
+1. **.NET Client SDK**: NuGet package with DI support
+2. **Plugin System**: Extensible validators, samplers, webhooks
+3. **Batch Operations**: Efficient bulk processing APIs
+4. **Python SDK**: PyPI package with async support
+5. **JavaScript SDK**: NPM package for web/Node.js
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+**How to Contribute**:
+- 📖 Read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
+- 🐛 Report bugs via [GitHub Issues](https://github.com/iyulab/loopai/issues)
+- 💡 Propose features in [Discussions](https://github.com/iyulab/loopai/discussions)
+- 🔧 Submit PRs for bug fixes or features
 
 ---
 
