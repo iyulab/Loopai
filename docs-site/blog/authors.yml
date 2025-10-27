@@ -1,25 +1,17 @@
-yangshun:
-  name: Yangshun Tay
-  title: Ex-Meta Staff Engineer, Co-founder GreatFrontEnd
-  url: https://linkedin.com/in/yangshun
-  image_url: https://github.com/yangshun.png
+caveman:
+  name: Caveman
+  title: Lead Developer, Loopai Framework
+  url: https://github.com/iyulab-caveman
+  image_url: https://github.com/iyulab-caveman.png
   page: true
   socials:
-    x: yangshunz
-    linkedin: yangshun
-    github: yangshun
-    newsletter: https://www.greatfrontend.com
+    github: iyulab-caveman
 
-slorber:
-  name: Sébastien Lorber
-  title: Docusaurus maintainer
-  url: https://sebastienlorber.com
-  image_url: https://github.com/slorber.png
-  page:
-    # customize the url of the author page at /blog/authors/<permalink>
-    permalink: '/all-sebastien-lorber-articles'
+junhyung:
+  name: Junhyung Lee
+  title: Core Contributor, Loopai Framework
+  url: https://github.com/iujunhyung
+  image_url: https://github.com/iujunhyung.png
+  page: true
   socials:
-    x: sebastienlorber
-    linkedin: sebastienlorber
-    github: slorber
-    newsletter: https://thisweekinreact.com
+    github: iujunhyung
