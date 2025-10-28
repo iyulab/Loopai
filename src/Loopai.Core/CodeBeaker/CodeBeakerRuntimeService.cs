@@ -64,23 +64,28 @@ public class CodeBeakerRuntimeService : IEdgeRuntimeService
             session = await _sessionPool.AcquireSessionAsync(normalizedLanguage, cancellationToken);
 
             // Prepare script with input injection
-            // CodeBeaker path strategy:
+            // CodeBeaker path strategy (UPDATED - workaround for CodeBeaker bug):
             // - WriteFileCommand/ReadFileCommand paths: Use /workspace/ virtual paths
-            //   (each runtime's GetFullPath() converts to actual workspace directory)
+            //   (DenoRuntime converts via GetFullPath(), other runtimes should too but don't yet)
+            // - ExecuteShellCommand script path: Use relative paths
+            //   (Only DenoRuntime converts /workspace/ paths in ExecuteShellCommand args; PythonRuntime doesn't)
+            //   TODO: Submit PR to CodeBeaker to add path conversion to PythonRuntime/other runtimes
             // - Wrapped code paths: Use relative paths (code executes WITH working directory = workspace)
-            //   Deno/Python/etc have WorkingDirectory set to actual workspace, so relative paths work
+            //   All runtimes set WorkingDirectory to actual workspace, so relative paths work
 
+            // Paths for file commands (WriteFileCommand/ReadFileCommand)
             string scriptPath = $"/workspace/program{config.Extension}";
             string inputPath = "/workspace/input.json";
             string outputPath = "/workspace/output.json";
 
-            _logger.LogDebug(
-                "Using /workspace/ virtual paths for file commands, relative paths for code wrapping - {Language} runtime",
-                normalizedLanguage);
-
-            // For code wrapping: Use relative paths because code executes IN the workspace directory
+            // Paths for execute command and wrapped code (relative paths)
+            string executeScriptPath = $"program{config.Extension}";
             var wrappedInputPath = "input.json";
             var wrappedOutputPath = "output.json";
+
+            _logger.LogDebug(
+                "Using /workspace/ for file commands, relative paths for execute and wrapped code - {Language} runtime",
+                normalizedLanguage);
 
             // Write input to file
             var inputJson = JsonSerializer.Serialize(
@@ -101,8 +106,14 @@ public class CodeBeakerRuntimeService : IEdgeRuntimeService
                 Content = wrappedCode
             }, cancellationToken);
 
-            // Execute program
-            var executeCommand = CreateExecuteCommand(normalizedLanguage, scriptPath, config.Command);
+            // Execute program (use relative path for execute command)
+            var executeCommand = CreateExecuteCommand(normalizedLanguage, executeScriptPath, config.Command);
+
+            _logger.LogDebug(
+                "ExecuteShellCommand - CommandName: {CommandName}, Args: {Args}",
+                executeCommand.CommandName,
+                string.Join(" ", executeCommand.Args ?? new List<string>()));
+
             var executeResult = await ExecuteCommandAsync(session, executeCommand, cancellationToken);
 
             session.ExecutionCount++;
