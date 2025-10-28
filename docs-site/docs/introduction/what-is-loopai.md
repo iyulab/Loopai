@@ -6,57 +6,44 @@ description: Understanding the Loopai framework and its core value proposition
 
 # What is Loopai?
 
-Loopai is a **program synthesis and execution framework** - infrastructure middleware for building adaptive AI-powered applications with complete observability and data sovereignty.
+Loopai is a **program synthesis and execution framework** that transforms natural language specifications into executable programs. It provides infrastructure for building adaptive AI-powered applications with complete observability and data sovereignty.
 
-## Framework Identity
+## Core Architecture
 
 - **Cloud API (C#/.NET 8)**: REST API for program generation, execution, and lifecycle management
 - **Client SDKs**: .NET, Python, TypeScript with full async/await support
-- **Edge Runtime (Deno)**: JavaScript/TypeScript/Python program execution with &lt;10ms latency
-- **Framework Integration**: Webhook events, Prometheus metrics, OpenTelemetry tracing, Plugin system
-- **Kubernetes-Ready**: Helm charts, health probes, horizontal autoscaling, security contexts
+- **Edge Runtime**: Program execution with low latency
+- **Plugin System**: Extensible architecture for custom validation and event handling
+- **Kubernetes-Ready**: Deployment-ready with Helm charts and health probes
 
-## Core Capability
+## The Approach
 
-Transform expensive LLM calls into self-improving programs that run anywhere with complete observability and data sovereignty.
+Instead of making repeated calls to language models, Loopai:
 
-## The Problem
+1. Generates a program once using an LLM
+2. Deploys the program to cloud or customer infrastructure
+3. Executes the program locally with low latency
+4. Stores execution data locally
+5. Samples data for validation and improvement
 
-Modern NLP applications rely on repeated LLM calls:
-
-- **High Cost**: $0.002-0.03 per call = $2,000-30,000/month for 1M requests
-- **High Latency**: 500-2000ms per call hurts user experience
-- **No Data Sovereignty**: All data sent to cloud providers
-
-## The Loopai Solution
-
-**Build Once, Run Anywhere**:
-
-- ✅ LLM generates program once ($0.20, 10s)
-- ✅ Deploy to cloud OR customer infrastructure
-- ✅ Execute locally (&lt;10ms, ~$0.00001/call)
-- ✅ Store all data locally (JSONL logs)
-- ✅ Sample 5% for validation
-- ✅ Continuous improvement via cloud
-
-**Results**:
-- **Cost Reduction**: 82-97% vs direct LLM
-- **Speed Improvement**: 50,000-100,000x faster
-- **Data Sovereignty**: 100% data stays local
+This approach offers:
+- **Cost Efficiency**: Reduce recurring API costs
+- **Low Latency**: Local execution eliminates network calls
+- **Data Privacy**: All execution data stays on your infrastructure
 
 ## Who Should Use Loopai?
 
-Loopai is ideal for **developers building AI-powered applications** who need:
+Loopai is designed for **developers building AI-powered applications** who need:
 
-1. **Cost Efficiency**: Reduce LLM API costs by 80%+ through program synthesis
-2. **Low Latency**: Sub-10ms execution for production workloads
+1. **Cost Efficiency**: Reduce LLM API costs through program synthesis
+2. **Low Latency**: Sub-millisecond execution for production workloads
 3. **Data Control**: Keep sensitive data on your infrastructure
-4. **Observability**: Full visibility into program execution and performance
-5. **Framework Flexibility**: Multi-language SDK support (.NET, Python, TypeScript)
+4. **Observability**: Full visibility into program execution
+5. **Multi-Language Support**: SDK support for .NET, Python, TypeScript
 
 ## When to Use Loopai
 
-### ✅ Excellent Fit
+### Good Fit
 
 **Text Classification**:
 - Spam detection, content moderation
@@ -69,16 +56,16 @@ Loopai is ideal for **developers building AI-powered applications** who need:
 - Data validation
 
 **Characteristics**:
-- High volume (10K+ requests/day)
+- High volume processing (10K+ requests/day)
 - Pattern-based logic
 - Acceptable accuracy (85-95%)
-- Low latency requirement (&lt;50ms)
+- Low latency requirements
 
-### ⚠️ Not Recommended
+### Not Recommended
 
-- **Creative Generation**: Novel content, story writing
+- **Creative Generation**: Novel content creation, story writing
 - **Complex Reasoning**: Multi-step inference, mathematical proofs
-- **High-Stakes Decisions**: Medical diagnosis, legal advice (>98% accuracy required)
+- **High-Stakes Decisions**: Applications requiring >98% accuracy (medical, legal)
 
 ## Next Steps
 

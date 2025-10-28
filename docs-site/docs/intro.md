@@ -4,20 +4,19 @@ sidebar_position: 1
 description: Human-in-the-Loop AI Self-Improvement Framework
 ---
 
-
-Loopai is a **Human-in-the-Loop AI Self-Improvement Framework** - infrastructure middleware for building adaptive AI-powered applications.
+Loopai is a **program synthesis and execution framework** that transforms natural language specifications into executable programs. It provides infrastructure for building adaptive AI-powered applications with multi-language support and complete data sovereignty.
 
 ## What is Loopai?
 
-Transform expensive LLM calls into self-improving programs that run anywhere with complete observability and data sovereignty.
+Instead of making repeated calls to language models, Loopai generates programs once and executes them locally with low latency and complete data control.
 
 ### Core Capabilities
 
-- 🚀 **Multi-Language SDKs**: .NET, Python, TypeScript
-- ⚡ **High Performance**: &lt;10ms execution latency
-- 💰 **Cost Efficient**: 82-97% cost reduction vs direct LLM
-- 🔌 **Plugin System**: Extensible architecture
-- 📊 **Production Ready**: 170+ tests passing
+- **Multi-Language SDKs**: .NET, Python, TypeScript
+- **Low Latency Execution**: Fast local program execution
+- **Data Sovereignty**: Execute on your own infrastructure
+- **Plugin System**: Extensible architecture
+- **Production Ready**: Comprehensive testing
 
 ## Quick Links
 
@@ -26,8 +25,12 @@ Transform expensive LLM calls into self-improving programs that run anywhere wit
 - [SDK Documentation](/docs/sdks/overview)
 - [API Reference](/docs/api/overview)
 
-## Version
+## Documentation
 
-Current: **v0.3** - SDK & Extensibility Complete
+Explore the documentation to learn how to:
+- Build AI-powered applications
+- Deploy to your infrastructure
+- Develop custom plugins
+- Integrate with your existing systems
 
 See [Blog](/blog) for release notes and updates.
