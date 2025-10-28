@@ -64,9 +64,14 @@ public class CodeBeakerRuntimeService : IEdgeRuntimeService
             session = await _sessionPool.AcquireSessionAsync(normalizedLanguage, cancellationToken);
 
             // Prepare script with input injection
+            // Use relative paths since the code will execute in the workspace directory
             var scriptPath = $"/workspace/program{config.Extension}";
             var inputPath = "/workspace/input.json";
             var outputPath = "/workspace/output.json";
+
+            // For code wrapping, use relative paths
+            var relativeInputPath = "input.json";
+            var relativeOutputPath = "output.json";
 
             // Write input to file
             var inputJson = JsonSerializer.Serialize(
@@ -79,8 +84,8 @@ public class CodeBeakerRuntimeService : IEdgeRuntimeService
                 Content = inputJson
             }, cancellationToken);
 
-            // Write program code
-            var wrappedCode = WrapCodeWithInputOutput(code, normalizedLanguage, inputPath, outputPath);
+            // Write program code (use relative paths for code that runs in workspace)
+            var wrappedCode = WrapCodeWithInputOutput(code, normalizedLanguage, relativeInputPath, relativeOutputPath);
             await ExecuteCommandAsync(session, new WriteFileCommand
             {
                 Path = scriptPath,
@@ -318,18 +323,49 @@ File.WriteAllText(""{outputPath}"", outputJson);
     {
         if (result is JsonElement jsonElement)
         {
-            if (jsonElement.TryGetProperty("content", out var contentProp))
+            // If it's already a string, return it directly
+            if (jsonElement.ValueKind == JsonValueKind.String)
             {
-                return contentProp.GetString();
+                return jsonElement.GetString();
+            }
+
+            // If it's an object, try to extract "content" property
+            if (jsonElement.ValueKind == JsonValueKind.Object)
+            {
+                if (jsonElement.TryGetProperty("content", out var contentProp))
+                {
+                    return contentProp.GetString();
+                }
             }
         }
 
-        // Try to serialize and extract content
-        var json = JsonSerializer.Serialize(result);
-        var doc = JsonDocument.Parse(json);
-        if (doc.RootElement.TryGetProperty("content", out var content))
+        // If result is already a string, return it
+        if (result is string str)
         {
-            return content.GetString();
+            return str;
+        }
+
+        // Try to serialize and extract content
+        try
+        {
+            var json = JsonSerializer.Serialize(result);
+            var doc = JsonDocument.Parse(json);
+
+            // Check if root is a string
+            if (doc.RootElement.ValueKind == JsonValueKind.String)
+            {
+                return doc.RootElement.GetString();
+            }
+
+            // Try to extract "content" property
+            if (doc.RootElement.TryGetProperty("content", out var content))
+            {
+                return content.GetString();
+            }
+        }
+        catch
+        {
+            // If serialization fails, return null
         }
 
         return null;

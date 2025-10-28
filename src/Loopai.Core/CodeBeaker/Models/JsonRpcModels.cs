@@ -153,7 +153,7 @@ public record ReadFileCommand : CodeBeakerCommand
 /// </summary>
 public record ExecuteShellCommand : CodeBeakerCommand
 {
-    [JsonPropertyName("commandName")]
+    [JsonPropertyName("command")]
     public required string CommandName { get; init; }
 
     [JsonPropertyName("args")]
