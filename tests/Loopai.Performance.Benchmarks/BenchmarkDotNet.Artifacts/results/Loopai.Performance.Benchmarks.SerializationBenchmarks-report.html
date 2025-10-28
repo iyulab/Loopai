@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Loopai.Performance.Benchmarks.SerializationBenchmarks-20251028-115447</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.4, Windows 11 (10.0.26200.6899)
+13th Gen Intel Core i7-1360P 2.20GHz, 1 CPU, 16 logical and 12 physical cores
+.NET SDK 9.0.306
+  [Host]   : .NET 8.0.21 (8.0.21, 8.0.2125.47513), X64 RyuJIT x86-64-v3
+  ShortRun : .NET 8.0.21 (8.0.21, 8.0.2125.47513), X64 RyuJIT x86-64-v3
+</code></pre>
+<pre><code>Job=ShortRun  IterationCount=3  LaunchCount=1  
+WarmupCount=3  
+</code></pre>
+
+<table>
+<thead><tr><th>Method          </th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Rank</th><th>Gen0</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>GetRawTextSimple</td><td>35.79 ns</td><td>211.15 ns</td><td>11.574 ns</td><td>0.25</td><td>0.07</td><td>1</td><td>0.0076</td><td>72 B</td><td>0.33</td>
+</tr><tr><td>GetRawTextComplex</td><td>54.77 ns</td><td>38.29 ns</td><td>2.099 ns</td><td>0.39</td><td>0.01</td><td>2</td><td>0.0714</td><td>672 B</td><td>3.11</td>
+</tr><tr><td>SerializeSimpleObject</td><td>140.87 ns</td><td>618.84 ns</td><td>33.921 ns</td><td>1.00</td><td>0.21</td><td>3</td><td>0.0076</td><td>72 B</td><td>0.33</td>
+</tr><tr><td>ParseSimpleJson</td><td>141.39 ns</td><td>26.99 ns</td><td>1.480 ns</td><td>1.00</td><td>0.01</td><td>3</td><td>0.0229</td><td>216 B</td><td>1.00</td>
+</tr><tr><td>SerializeComplexObject</td><td>589.38 ns</td><td>185.21 ns</td><td>10.152 ns</td><td>4.17</td><td>0.07</td><td>4</td><td>0.0744</td><td>704 B</td><td>3.26</td>
+</tr><tr><td>ParseComplexJson</td><td>787.25 ns</td><td>48.56 ns</td><td>2.662 ns</td><td>5.57</td><td>0.05</td><td>5</td><td>0.1211</td><td>1144 B</td><td>5.30</td>
+</tr></tbody></table>
+</body>
+</html>

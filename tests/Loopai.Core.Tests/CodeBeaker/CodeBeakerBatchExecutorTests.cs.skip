@@ -32,7 +32,7 @@ public class CodeBeakerBatchExecutorTests : IAsyncLifetime
         // Create real CodeBeaker client and session pool
         var options = Microsoft.Extensions.Options.Options.Create(new Models.CodeBeakerOptions
         {
-            WebSocketUrl = "ws://localhost:5000/ws/jsonrpc",
+            WebSocketUrl = "ws://localhost:5039/ws/jsonrpc",
             SessionPoolSize = 10,
             SessionIdleTimeoutMinutes = 30,
             SessionMaxLifetimeMinutes = 120
@@ -66,7 +66,7 @@ public class CodeBeakerBatchExecutorTests : IAsyncLifetime
         await _sessionPool.DisposeAsync();
     }
 
-    [Fact(Skip = "Requires CodeBeaker server running on localhost:5000")]
+    [Fact]
     public async Task ExecuteBatchAsync_PythonCode_ShouldExecuteSuccessfully()
     {
         // Arrange
@@ -136,7 +136,7 @@ public class CodeBeakerBatchExecutorTests : IAsyncLifetime
             result.SuccessCount, result.TotalItems, result.TotalDurationMs, result.AvgLatencyMs);
     }
 
-    [Fact(Skip = "Requires CodeBeaker server running on localhost:5000")]
+    [Fact]
     public async Task ExecuteBatchAsync_MultipleLanguages_ShouldExecuteSuccessfully()
     {
         // Arrange
@@ -212,7 +212,7 @@ public class CodeBeakerBatchExecutorTests : IAsyncLifetime
         Assert.True(stats.TotalSessions >= 2, "Should have sessions for both Python and JavaScript");
     }
 
-    [Fact(Skip = "Requires CodeBeaker server running on localhost:5000")]
+    [Fact]
     public async Task ExecuteBatchAsync_SessionReuse_ShouldReuseIdleSessions()
     {
         // Arrange
@@ -287,7 +287,7 @@ public class CodeBeakerBatchExecutorTests : IAsyncLifetime
             statsAfterBatch1.TotalSessions, statsAfterBatch2.TotalSessions);
     }
 
-    [Fact(Skip = "Requires CodeBeaker server running on localhost:5000")]
+    [Fact]
     public async Task ExecuteBatchAsync_WithConcurrencyLimit_ShouldRespectLimit()
     {
         // Arrange
@@ -360,7 +360,7 @@ result = {'value': input_data['value']}
             result.TotalItems, result.TotalDurationMs);
     }
 
-    [Fact(Skip = "Requires CodeBeaker server running on localhost:5000")]
+    [Fact]
     public async Task ExecuteBatchAsync_WithStopOnFirstError_ShouldStopAfterFirstFailure()
     {
         // Arrange
@@ -428,7 +428,7 @@ result = {'value': input_data['value'] * 2}
             result.TotalItems, result.FailureCount);
     }
 
-    [Fact(Skip = "Requires CodeBeaker server running on localhost:5000")]
+    [Fact]
     public async Task ExecuteBatchAsync_WithErrorInCode_ShouldReturnFailureResult()
     {
         // Arrange
@@ -491,7 +491,7 @@ result = {'value': input_data['value'] * 2}
             result.Items[0].ErrorMessage);
     }
 
-    [Fact(Skip = "Requires CodeBeaker server running on localhost:5000")]
+    [Fact]
     public async Task ExecuteBatchAsync_WithSampling_ShouldMarkSampledItems()
     {
         // Arrange
@@ -556,7 +556,7 @@ result = {'value': input_data['value'] * 2}
             result.Items.Count(i => i.SampledForValidation), result.TotalItems);
     }
 
-    [Fact(Skip = "Requires CodeBeaker server running on localhost:5000")]
+    [Fact]
     public async Task ExecuteBatchAsync_SessionPoolStatistics_ShouldBeAccurate()
     {
         // Arrange

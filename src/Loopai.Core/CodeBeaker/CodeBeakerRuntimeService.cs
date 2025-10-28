@@ -18,8 +18,8 @@ public class CodeBeakerRuntimeService : IEdgeRuntimeService
     private static readonly Dictionary<string, (string Command, string Extension)> LanguageConfig = new()
     {
         { "python", ("python3", ".py") },
-        { "javascript", ("node", ".js") },
-        { "typescript", ("node", ".js") },  // TypeScript compiled to JS
+        { "javascript", ("deno", ".js") },  // Use Deno for JavaScript (supports WriteFile command)
+        { "typescript", ("deno", ".ts") },  // Use Deno for TypeScript (native support)
         { "go", ("go", ".go") },
         { "csharp", ("dotnet", ".cs") },
         { "dotnet", ("dotnet", ".cs") }

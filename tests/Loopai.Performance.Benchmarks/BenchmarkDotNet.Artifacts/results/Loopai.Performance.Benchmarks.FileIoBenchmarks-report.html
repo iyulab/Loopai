@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Loopai.Performance.Benchmarks.FileIoBenchmarks-20251028-115411</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.4, Windows 11 (10.0.26200.6899)
+13th Gen Intel Core i7-1360P 2.20GHz, 1 CPU, 16 logical and 12 physical cores
+.NET SDK 9.0.306
+  [Host]   : .NET 8.0.21 (8.0.21, 8.0.2125.47513), X64 RyuJIT x86-64-v3
+  ShortRun : .NET 8.0.21 (8.0.21, 8.0.2125.47513), X64 RyuJIT x86-64-v3
+</code></pre>
+<pre><code>Job=ShortRun  IterationCount=3  LaunchCount=1  
+WarmupCount=3  
+</code></pre>
+
+<table>
+<thead><tr><th>Method                      </th><th>Mean    </th><th>Error   </th><th>StdDev </th><th>Ratio</th><th>RatioSD</th><th>Rank</th><th>Gen0</th><th>Gen1</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>WriteToMemoryStream</td><td>880.2 ns</td><td>1,540.4 ns</td><td>84.43 ns</td><td>0.002</td><td>0.00</td><td>1</td><td>1.0414</td><td>0.0381</td><td>9800 B</td><td>8.39</td>
+</tr><tr><td>WriteAndDeleteTempFileSync</td><td>343,618.7 ns</td><td>127,877.1 ns</td><td>7,009.38 ns</td><td>0.881</td><td>0.02</td><td>2</td><td>-</td><td>-</td><td>464 B</td><td>0.40</td>
+</tr><tr><td>WriteAndDeleteTempFile</td><td>390,007.4 ns</td><td>167,509.9 ns</td><td>9,181.78 ns</td><td>1.000</td><td>0.03</td><td>2</td><td>-</td><td>-</td><td>1168 B</td><td>1.00</td>
+</tr><tr><td>WriteAndDeleteTempFileWithEncoding</td><td>444,657.2 ns</td><td>230,818.5 ns</td><td>12,651.94 ns</td><td>1.141</td><td>0.04</td><td>2</td><td>-</td><td>-</td><td>1200 B</td><td>1.03</td>
+</tr><tr><td>MultipleFileOperations</td><td>2,585,347.1 ns</td><td>2,328,666.0 ns</td><td>127,642.04 ns</td><td>6.631</td><td>0.31</td><td>3</td><td>-</td><td>-</td><td>6097 B</td><td>5.22</td>
+</tr></tbody></table>
+</body>
+</html>

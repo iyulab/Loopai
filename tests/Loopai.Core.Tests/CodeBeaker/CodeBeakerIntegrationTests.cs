@@ -35,7 +35,7 @@ public class CodeBeakerIntegrationTests : IAsyncLifetime
         // Configure options
         var options = Options.Create(new CodeBeakerOptions
         {
-            WebSocketUrl = "ws://localhost:5000/ws/jsonrpc",
+            WebSocketUrl = "ws://localhost:5039/ws/jsonrpc",
             SessionPoolSize = 5,
             SessionIdleTimeoutMinutes = 30,
             SessionMaxLifetimeMinutes = 120,
@@ -73,7 +73,7 @@ public class CodeBeakerIntegrationTests : IAsyncLifetime
         _output.WriteLine("Disposed CodeBeaker client and session pool");
     }
 
-    [Fact(Skip = "Requires CodeBeaker server")]
+    [Fact]
     public async Task ExecuteAsync_PythonCode_ShouldReturnCorrectResult()
     {
         // Arrange
@@ -97,7 +97,7 @@ result = {'output': input_data['value'] * 2}
         Assert.Equal(42, output.GetProperty("output").GetInt32());
     }
 
-    [Fact(Skip = "Requires CodeBeaker server")]
+    [Fact]
     public async Task ExecuteAsync_JavaScriptCode_ShouldReturnCorrectResult()
     {
         // Arrange
@@ -121,7 +121,7 @@ const result = { output: input_data.value * 2 };
         Assert.Equal(42, output.GetProperty("output").GetInt32());
     }
 
-    [Fact(Skip = "Requires CodeBeaker server")]
+    [Fact]
     public async Task ExecuteAsync_GoCode_ShouldReturnCorrectResult()
     {
         // Arrange
@@ -146,7 +146,7 @@ result := map[string]interface{}{""output"": value * 2}
         Assert.Equal(42, output.GetProperty("output").GetInt32());
     }
 
-    [Fact(Skip = "Requires CodeBeaker server")]
+    [Fact]
     public async Task ExecuteAsync_CSharpCode_ShouldReturnCorrectResult()
     {
         // Arrange
@@ -171,7 +171,7 @@ var result = new { output = value * 2 };
         Assert.Equal(42, output.GetProperty("output").GetInt32());
     }
 
-    [Fact(Skip = "Requires CodeBeaker server")]
+    [Fact]
     public async Task SessionPool_ShouldReuseSession()
     {
         // Arrange
@@ -197,7 +197,7 @@ result = {'count': 1}
         Assert.True(stats.TotalSessions <= 2, $"Expected <=2 sessions, got {stats.TotalSessions}");
     }
 
-    [Fact(Skip = "Requires CodeBeaker server")]
+    [Fact]
     public async Task SessionPool_ShouldCreateMultipleSessionsForDifferentLanguages()
     {
         // Arrange
@@ -220,7 +220,7 @@ result = {'count': 1}
         Assert.True(stats.TotalSessions >= 2, $"Expected >=2 sessions, got {stats.TotalSessions}");
     }
 
-    [Fact(Skip = "Requires CodeBeaker server")]
+    [Fact]
     public async Task ExecuteAsync_WithErrorInCode_ShouldReturnError()
     {
         // Arrange
@@ -239,7 +239,7 @@ undefined_variable
         _output.WriteLine($"Error: {result.Error}");
     }
 
-    [Fact(Skip = "Requires CodeBeaker server")]
+    [Fact]
     public async Task ExecuteAsync_UnsupportedLanguage_ShouldReturnError()
     {
         // Arrange
