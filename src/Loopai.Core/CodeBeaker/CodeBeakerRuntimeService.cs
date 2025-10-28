@@ -220,17 +220,18 @@ with open('{outputPath}', 'w') as f:
 
     private static string WrapJavaScriptCode(string code, string inputPath, string outputPath)
     {
+        // Deno-compatible wrapper (uses Deno APIs instead of Node's require)
         return $@"
-const fs = require('fs');
-
-// Read input
-const input_data = JSON.parse(fs.readFileSync('{inputPath}', 'utf8'));
+// Read input using Deno API
+const inputText = await Deno.readTextFile('{inputPath}');
+const input_data = JSON.parse(inputText);
 
 // User code
 {code}
 
 // Write output (assumes 'result' variable exists)
-fs.writeFileSync('{outputPath}', JSON.stringify(result));
+const outputText = JSON.stringify(result);
+await Deno.writeTextFile('{outputPath}', outputText);
 ";
     }
 

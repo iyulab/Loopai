@@ -116,13 +116,12 @@ public record SessionExecuteParams
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
 [JsonDerivedType(typeof(WriteFileCommand), typeDiscriminator: "write_file")]
 [JsonDerivedType(typeof(ReadFileCommand), typeDiscriminator: "read_file")]
-[JsonDerivedType(typeof(ExecuteShellCommand), typeDiscriminator: "execute_shell")]
-[JsonDerivedType(typeof(CreateDirectoryCommand), typeDiscriminator: "create_directory")]
+[JsonDerivedType(typeof(ExecuteShellCommand), typeDiscriminator: "shell")]
+[JsonDerivedType(typeof(CreateDirectoryCommand), typeDiscriminator: "create_dir")]
 [JsonDerivedType(typeof(DeleteFileCommand), typeDiscriminator: "delete_file")]
 public abstract record CodeBeakerCommand
 {
-    [JsonPropertyName("type")]
-    public abstract string Type { get; }
+    // Type discriminator handled automatically by JsonPolymorphic attribute
 }
 
 /// <summary>
@@ -130,8 +129,6 @@ public abstract record CodeBeakerCommand
 /// </summary>
 public record WriteFileCommand : CodeBeakerCommand
 {
-    public override string Type => "write_file";
-
     [JsonPropertyName("path")]
     public required string Path { get; init; }
 
@@ -147,8 +144,6 @@ public record WriteFileCommand : CodeBeakerCommand
 /// </summary>
 public record ReadFileCommand : CodeBeakerCommand
 {
-    public override string Type => "read_file";
-
     [JsonPropertyName("path")]
     public required string Path { get; init; }
 }
@@ -158,8 +153,6 @@ public record ReadFileCommand : CodeBeakerCommand
 /// </summary>
 public record ExecuteShellCommand : CodeBeakerCommand
 {
-    public override string Type => "execute_shell";
-
     [JsonPropertyName("commandName")]
     public required string CommandName { get; init; }
 
@@ -175,8 +168,6 @@ public record ExecuteShellCommand : CodeBeakerCommand
 /// </summary>
 public record CreateDirectoryCommand : CodeBeakerCommand
 {
-    public override string Type => "create_directory";
-
     [JsonPropertyName("path")]
     public required string Path { get; init; }
 }
@@ -186,8 +177,6 @@ public record CreateDirectoryCommand : CodeBeakerCommand
 /// </summary>
 public record DeleteFileCommand : CodeBeakerCommand
 {
-    public override string Type => "delete_file";
-
     [JsonPropertyName("path")]
     public required string Path { get; init; }
 }

@@ -163,7 +163,7 @@ public class CodeBeakerClient : ICodeBeakerClient
     {
         _logger.LogDebug(
             "Executing command in session {SessionId}: {CommandType}",
-            parameters.SessionId, parameters.Command.Type);
+            parameters.SessionId, parameters.Command.GetType().Name.Replace("Command", "").ToLowerInvariant());
 
         var request = new JsonRpcRequest
         {
