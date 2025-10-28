@@ -64,14 +64,23 @@ public class CodeBeakerRuntimeService : IEdgeRuntimeService
             session = await _sessionPool.AcquireSessionAsync(normalizedLanguage, cancellationToken);
 
             // Prepare script with input injection
-            // Use relative paths since the code will execute in the workspace directory
-            var scriptPath = $"/workspace/program{config.Extension}";
-            var inputPath = "/workspace/input.json";
-            var outputPath = "/workspace/output.json";
+            // CodeBeaker path strategy:
+            // - WriteFileCommand/ReadFileCommand paths: Use /workspace/ virtual paths
+            //   (each runtime's GetFullPath() converts to actual workspace directory)
+            // - Wrapped code paths: Use relative paths (code executes WITH working directory = workspace)
+            //   Deno/Python/etc have WorkingDirectory set to actual workspace, so relative paths work
 
-            // For code wrapping, use relative paths
-            var relativeInputPath = "input.json";
-            var relativeOutputPath = "output.json";
+            string scriptPath = $"/workspace/program{config.Extension}";
+            string inputPath = "/workspace/input.json";
+            string outputPath = "/workspace/output.json";
+
+            _logger.LogDebug(
+                "Using /workspace/ virtual paths for file commands, relative paths for code wrapping - {Language} runtime",
+                normalizedLanguage);
+
+            // For code wrapping: Use relative paths because code executes IN the workspace directory
+            var wrappedInputPath = "input.json";
+            var wrappedOutputPath = "output.json";
 
             // Write input to file
             var inputJson = JsonSerializer.Serialize(
@@ -84,8 +93,8 @@ public class CodeBeakerRuntimeService : IEdgeRuntimeService
                 Content = inputJson
             }, cancellationToken);
 
-            // Write program code (use relative paths for code that runs in workspace)
-            var wrappedCode = WrapCodeWithInputOutput(code, normalizedLanguage, relativeInputPath, relativeOutputPath);
+            // Write program code (use /workspace/ paths consistent with file operations)
+            var wrappedCode = WrapCodeWithInputOutput(code, normalizedLanguage, wrappedInputPath, wrappedOutputPath);
             await ExecuteCommandAsync(session, new WriteFileCommand
             {
                 Path = scriptPath,
@@ -98,17 +107,40 @@ public class CodeBeakerRuntimeService : IEdgeRuntimeService
 
             session.ExecutionCount++;
 
+            // Log execution details for debugging
+            _logger.LogDebug(
+                "Execution result - Success: {Success}, Result: {Result}",
+                executeResult.Success,
+                executeResult.Result?.ToString() ?? "null");
+
             if (!executeResult.Success)
             {
                 stopwatch.Stop();
+
+                // Extract stderr from result if available
+                var stderr = ExtractStderr(executeResult.Result);
+
+                _logger.LogError(
+                    "Code execution failed - Error: {Error}, Stderr: {Stderr}",
+                    executeResult.Error, stderr);
+
                 return new EdgeExecutionResult
                 {
                     Success = false,
                     Error = executeResult.Error ?? "Execution failed",
                     ExecutionTimeMs = (int)stopwatch.ElapsedMilliseconds,
                     MemoryUsedBytes = 0,
-                    StandardError = executeResult.Error
+                    StandardError = stderr ?? executeResult.Error
                 };
+            }
+
+            // Even if success=true, check for stderr output
+            var executionStderr = ExtractStderr(executeResult.Result);
+            if (!string.IsNullOrEmpty(executionStderr))
+            {
+                _logger.LogWarning(
+                    "Code execution had stderr output: {Stderr}",
+                    executionStderr);
             }
 
             // Read output
@@ -366,6 +398,48 @@ File.WriteAllText(""{outputPath}"", outputJson);
         catch
         {
             // If serialization fails, return null
+        }
+
+        return null;
+    }
+
+    private static string? ExtractStderr(object? result)
+    {
+        if (result == null)
+        {
+            return null;
+        }
+
+        try
+        {
+            if (result is JsonElement jsonElement && jsonElement.ValueKind == JsonValueKind.Object)
+            {
+                if (jsonElement.TryGetProperty("stderr", out var stderrProp))
+                {
+                    return stderrProp.GetString();
+                }
+                if (jsonElement.TryGetProperty("error", out var errorProp))
+                {
+                    return errorProp.GetString();
+                }
+            }
+
+            // Try to serialize and extract stderr
+            var json = JsonSerializer.Serialize(result);
+            var doc = JsonDocument.Parse(json);
+
+            if (doc.RootElement.TryGetProperty("stderr", out var stderr))
+            {
+                return stderr.GetString();
+            }
+            if (doc.RootElement.TryGetProperty("error", out var error))
+            {
+                return error.GetString();
+            }
+        }
+        catch
+        {
+            // If extraction fails, return null
         }
 
         return null;
