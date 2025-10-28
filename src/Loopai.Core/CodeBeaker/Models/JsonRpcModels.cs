@@ -61,6 +61,9 @@ public record SessionCreateParams
     [JsonPropertyName("language")]
     public required string Language { get; init; }
 
+    [JsonPropertyName("runtime")]
+    public string? Runtime { get; init; }
+
     [JsonPropertyName("idleTimeoutMinutes")]
     public int IdleTimeoutMinutes { get; init; } = 30;
 
@@ -83,10 +86,16 @@ public record SessionCreateResult
     public required string SessionId { get; init; }
 
     [JsonPropertyName("containerId")]
-    public required string ContainerId { get; init; }
+    public string? ContainerId { get; init; }
+
+    [JsonPropertyName("environmentId")]
+    public string? EnvironmentId { get; init; }
 
     [JsonPropertyName("language")]
     public required string Language { get; init; }
+
+    [JsonPropertyName("runtime")]
+    public string? Runtime { get; init; }
 
     [JsonPropertyName("createdAt")]
     public required DateTime CreatedAt { get; init; }

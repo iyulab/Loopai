@@ -87,4 +87,24 @@ public class CodeBeakerOptions
         { "csharp", "csharp" },
         { "dotnet", "csharp" }
     };
+
+    /// <summary>
+    /// Default runtime type for all executions.
+    /// Docker provides strongest isolation, Deno/Bun provide best performance.
+    /// </summary>
+    public RuntimeType DefaultRuntime { get; set; } = RuntimeType.Docker;
+
+    /// <summary>
+    /// Language-specific runtime mapping (overrides DefaultRuntime).
+    /// Key: language name (lowercase), Value: preferred runtime type.
+    /// </summary>
+    public Dictionary<string, RuntimeType> LanguageRuntimeMap { get; set; } = new()
+    {
+        { "javascript", RuntimeType.Deno },  // Use Deno for JS (25x faster startup)
+        { "typescript", RuntimeType.Deno },  // Use Deno for TS (native support)
+        { "python", RuntimeType.Python },    // Use Python runtime for Python
+        { "go", RuntimeType.Docker },        // Use Docker for Go (requires compilation)
+        { "csharp", RuntimeType.Docker },    // Use Docker for C#
+        { "dotnet", RuntimeType.Docker }     // Use Docker for .NET
+    };
 }

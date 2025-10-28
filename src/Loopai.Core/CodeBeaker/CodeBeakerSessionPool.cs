@@ -212,11 +212,17 @@ public class CodeBeakerSessionPool : IAsyncDisposable
         string language,
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Creating new session for language: {Language}", language);
+        // Select optimal runtime for this language
+        var runtime = SelectRuntimeForLanguage(language);
+
+        _logger.LogInformation(
+            "Creating new session for language: {Language} with runtime: {Runtime}",
+            language, runtime);
 
         var createParams = new SessionCreateParams
         {
             Language = language,
+            Runtime = runtime.ToString().ToLowerInvariant(),
             IdleTimeoutMinutes = _options.SessionIdleTimeoutMinutes,
             MaxLifetimeMinutes = _options.SessionMaxLifetimeMinutes,
             MemoryLimitMB = _options.MemoryLimitMB,
@@ -228,7 +234,7 @@ public class CodeBeakerSessionPool : IAsyncDisposable
         var session = new CodeBeakerSession
         {
             SessionId = result.SessionId,
-            ContainerId = result.ContainerId,
+            ContainerId = result.ContainerId ?? result.EnvironmentId ?? "unknown",
             Language = result.Language,
             CreatedAt = result.CreatedAt,
             LastActivity = DateTime.UtcNow,
@@ -239,10 +245,33 @@ public class CodeBeakerSessionPool : IAsyncDisposable
         _sessions[session.SessionId] = session;
 
         _logger.LogInformation(
-            "Created session {SessionId} for language {Language}",
-            session.SessionId, language);
+            "Created session {SessionId} for language {Language} with runtime {Runtime}",
+            session.SessionId, language, result.Runtime ?? runtime.ToString());
 
         return session;
+    }
+
+    /// <summary>
+    /// Select optimal runtime for a given language based on configuration.
+    /// </summary>
+    private RuntimeType SelectRuntimeForLanguage(string language)
+    {
+        var normalizedLanguage = language.ToLowerInvariant();
+
+        // Check language-specific runtime mapping first
+        if (_options.LanguageRuntimeMap.TryGetValue(normalizedLanguage, out var runtimeType))
+        {
+            _logger.LogDebug(
+                "Selected {Runtime} runtime for {Language} from language mapping",
+                runtimeType, language);
+            return runtimeType;
+        }
+
+        // Fall back to default runtime
+        _logger.LogDebug(
+            "Using default {Runtime} runtime for {Language}",
+            _options.DefaultRuntime, language);
+        return _options.DefaultRuntime;
     }
 
     private async Task CloseSessionInternalAsync(
