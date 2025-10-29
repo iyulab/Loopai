@@ -1,7 +1,7 @@
 # Loopai Development Tasks
 
-**Current Status**: v0.3 Complete
-**Last Updated**: 2025-10-27
+**Current Status**: v0.3 Complete → v1.0.0 Refactoring (Phase 0)
+**Last Updated**: 2025-10-29
 
 ---
 
@@ -45,132 +45,149 @@
 
 ---
 
-## 🔄 v0.4 - Enterprise Features (IN PROGRESS)
+## 🔄 v0.4 - Infrastructure Enhancements (IN PROGRESS)
 
-**Timeline**: Phase 12+ (2-3 months)
-**Focus**: Enterprise-grade features and scalability
+**Timeline**: Phase 0-13+ (3-4 months)
+**Focus**: Foundation refactoring → Production-grade infrastructure capabilities
+
+---
+
+### 🔴 CRITICAL - Phase 0: Foundation Refactoring (BLOCKING)
+
+**Status**: 🚨 Must complete BEFORE all other v0.4 work
+**Duration**: 2-3 weeks
+**Breaking Changes**: YES - Major version bump to v1.0.0
+
+#### 0.1 Loop App Terminology Refactoring
+**Rationale**: Align codebase with conceptual model (CONCEPTS.md). Doing this now prevents rewriting all v0.4 code later.
+
+- [ ] **0.1.1** Phase 0: Infrastructure
+  - Create feature branch `refactor/task-to-loop-app`
+  - Ensure all tests passing (baseline)
+  - Database backup procedures
+  - Document API endpoint migration path
+  - **Deliverable**: Refactoring infrastructure ready
+
+- [ ] **0.1.2** Phase 1: Core Domain Models
+  - Rename: `TaskSpecification` → `LoopAppSpecification`
+  - Rename: `ITaskService` → `ILoopAppService`
+  - Rename: `TaskService` → `LoopAppService`
+  - Update all Core layer tests
+  - **Deliverable**: Core domain models refactored
+
+- [ ] **0.1.3** Phase 2: Database Migration
+  - Create migration: `Tasks` table → `LoopApps` table
+  - Rename columns: `TaskId` → `LoopAppId` across all tables
+  - Update DbContext and repositories
+  - **Deliverable**: Database schema migrated
+
+- [ ] **0.1.4** Phase 3: API Layer (Breaking Change)
+  - Rename: `TasksController` → `LoopAppsController`
+  - Change route: `/api/v1/tasks` → `/api/v1/loop-apps`
+  - Update all DTOs and validators
+  - **Deliverable**: API endpoints refactored
+
+- [ ] **0.1.5** Phase 4: Client SDKs (Breaking Change)
+  - Update .NET SDK: `taskId` → `loopAppId` parameters
+  - Update Python SDK: `task_id` → `loop_app_id` parameters
+  - Update TypeScript SDK: `taskId` → `loopAppId` parameters
+  - **Deliverable**: All SDKs v1.0.0-alpha
+
+- [ ] **0.1.6** Phase 5: Integration Tests
+  - Update all integration test scenarios
+  - Cross-SDK compatibility validation
+  - **Deliverable**: All tests passing
+
+- [ ] **0.1.7** Phase 6-7: Documentation & Release
+  - Update ARCHITECTURE.md, DEPLOYMENT.md
+  - Create MIGRATION_V0_TO_V1.md guide
+  - Version bump: v0.3.x → v1.0.0
+  - **Deliverable**: v1.0.0 released
+
+**Estimated Duration**: 13-19 days (2-3 weeks)
+**Reference**: See [REFACTORING_PLAN.md](docs/REFACTORING_PLAN.md) for detailed phase breakdown
+
+---
 
 ### High Priority Tasks
 
-#### 12.1 Multi-Tenancy & Organizations
-- [ ] **12.1.1** Organization data model
-  - Design multi-tenant database schema
-  - Implement tenant isolation
-  - Create organization management API
-  - Build tenant-aware authentication
+#### 13.1 Advanced Analytics (Infrastructure Performance)
+- [ ] **13.1.1** Loop App execution analytics pipeline
+  - Real-time execution metrics aggregation
+  - Historical performance trend analysis
+  - Program artifact quality metrics
+  - Execution latency and throughput monitoring
 
-- [ ] **12.1.2** Resource isolation
-  - Per-tenant quotas and limits
-  - Tenant-specific configuration
-  - Cross-tenant data isolation
-  - Tenant metrics and billing
+- [ ] **13.1.2** Program improvement insights
+  - Automated improvement opportunity detection
+  - Program version performance comparison
+  - Dataset quality analysis
+  - Validation accuracy tracking
 
-- [ ] **12.1.3** Organization API
-  - CRUD operations for organizations
-  - User-organization relationships
-  - Role assignments per organization
-  - Organization settings management
-
-**Estimated Duration**: 3 weeks
-
----
-
-#### 12.2 Advanced Analytics
-- [ ] **12.2.1** Analytics pipeline
-  - Real-time metrics aggregation
-  - Historical trend analysis
-  - Cost attribution per task/tenant
-  - Performance analytics dashboard
-
-- [ ] **12.2.2** Reporting system
-  - Scheduled report generation
-  - Custom report builder
-  - Export to PDF/CSV/Excel
-  - Email delivery automation
-
-- [ ] **12.2.3** Cost optimization tools
-  - Cost prediction modeling
-  - Optimization recommendations
-  - ROI calculator
-  - Budget alerts
+- [ ] **13.1.3** Infrastructure optimization tools
+  - Resource usage prediction modeling
+  - Performance optimization recommendations
+  - Execution cost analysis per Loop App
+  - Capacity planning insights
 
 **Estimated Duration**: 2 weeks
+**Note**: Analytics focused on Loop App execution and program quality, NOT user/organization management
 
 ---
 
-#### 12.3 Authentication & Authorization
-- [ ] **12.3.1** SSO integration
-  - SAML 2.0 support
-  - OAuth 2.0 / OpenID Connect
-  - Azure AD integration
-  - Google Workspace integration
+#### 13.2 Advanced A/B Testing (Program Versions)
+- [ ] **13.2.1** Program artifact testing framework
+  - Multi-version program testing (v1 vs v2 vs v3)
+  - Statistical significance testing for program quality
+  - Automatic best version selection based on metrics
+  - Gradual rollout of improved programs
 
-- [ ] **12.3.2** RBAC implementation
-  - Role definition system
-  - Permission management
-  - Role-based API access control
-  - Audit logging for auth events
+- [ ] **13.2.2** Version experiment management
+  - Program version lifecycle management
+  - Traffic splitting between artifact versions
+  - Real-time version performance metrics
+  - Program improvement experiment history
 
-- [ ] **12.3.3** API key management
-  - Scoped API keys
-  - Key rotation
-  - Usage tracking per key
-  - Key expiration policies
-
-**Estimated Duration**: 3 weeks
+**Estimated Duration**: 2 weeks
+**Note**: A/B testing for program artifacts, NOT user features
 
 ---
 
 ### Medium Priority Tasks
 
-#### 12.4 Advanced A/B Testing
-- [ ] **12.4.1** Experiment framework
-  - Multi-variant testing support
-  - Statistical significance testing
-  - Automatic winner selection
-  - Gradual rollout automation
+#### 13.3 Plugin Ecosystem (Infrastructure Extensibility)
+- [ ] **13.3.1** Plugin registry enhancement
+  - Plugin discovery and search
+  - Plugin versioning and compatibility
+  - Plugin dependency management
+  - Plugin quality ratings (based on usage)
 
-- [ ] **12.4.2** Experiment management
-  - Experiment lifecycle management
-  - Traffic splitting configuration
-  - Real-time experiment metrics
-  - Experiment history and audit
+- [ ] **13.3.2** Plugin distribution
+  - Plugin submission and validation workflow
+  - Automated plugin testing
+  - Security scanning for malicious plugins
+  - Plugin publishing and update pipeline
 
 **Estimated Duration**: 2 weeks
+**Note**: Validator, Sampler, Webhook plugins for infrastructure extensibility
 
 ---
 
-#### 12.5 Plugin Marketplace
-- [ ] **12.5.1** Plugin registry
-  - Plugin discovery service
-  - Plugin versioning
-  - Plugin dependencies
-  - Plugin ratings and reviews
-
-- [ ] **12.5.2** Plugin distribution
-  - Plugin submission workflow
-  - Automated testing
-  - Security scanning
-  - Publishing pipeline
-
-**Estimated Duration**: 2 weeks
-
----
-
-#### 12.6 Enhanced Observability
-- [ ] **12.6.1** Distributed tracing
+#### 13.4 Enhanced Observability (Infrastructure Monitoring)
+- [ ] **13.4.1** Distributed tracing for Loop App execution
   - OpenTelemetry integration
-  - Trace visualization
-  - Performance bottleneck detection
-  - Cross-service correlation
+  - Program execution trace visualization
+  - Performance bottleneck detection in execution pipeline
+  - Cross-component correlation (Generator → Executor → Validator)
 
-- [ ] **12.6.2** Advanced monitoring
-  - Custom metric dashboards
-  - Anomaly detection
-  - Predictive alerting
-  - SLA tracking
+- [ ] **13.4.2** Infrastructure monitoring
+  - Loop App execution metric dashboards
+  - Execution anomaly detection
+  - Predictive alerting for infrastructure issues
+  - Infrastructure SLA tracking (uptime, latency)
 
 **Estimated Duration**: 2 weeks
+**Note**: Focus on infrastructure observability, NOT application-level user tracking
 
 ---
 
@@ -197,39 +214,40 @@
 
 ---
 
-## 🎯 v1.0 - Production (PLANNED)
+## 🎯 v2.0 - Production Infrastructure (PLANNED)
 
-**Timeline**: 6-9 months
-**Focus**: Enterprise-grade reliability and compliance
+**Timeline**: 6-9 months (after v0.4)
+**Focus**: Production-grade infrastructure reliability and scalability
 
-### v1.0 Feature List
+### v2.0 Feature List
 
-#### Compliance & Security
-- [ ] SOC 2 Type II certification
-- [ ] GDPR compliance features
-- [ ] HIPAA compliance features
-- [ ] ISO 27001 preparation
-- [ ] Security audit automation
+#### Infrastructure Reliability
+- [ ] 99.9% uptime SLA for Loop App execution
+- [ ] Multi-region deployment for high availability
+- [ ] Automatic failover for execution infrastructure
+- [ ] Disaster recovery procedures for program artifacts
+- [ ] Automated backup and restore for Loop App data
 
-#### Reliability & SLA
-- [ ] 99.9% uptime SLA
-- [ ] Multi-region deployment
-- [ ] Automatic failover
-- [ ] Disaster recovery procedures
-- [ ] Backup and restore automation
+#### Execution Engine Performance
+- [ ] Sub-10ms latency for cached program execution
+- [ ] Horizontal scaling for high-volume execution
+- [ ] Advanced caching strategies for program artifacts
+- [ ] Resource optimization and auto-scaling
+- [ ] Execution queue management with priority support
 
-#### Advanced Features
-- [ ] Federated learning capabilities
+#### Program Generation & Improvement
+- [ ] Federated learning for program improvement
+- [ ] Multi-language program generation (5+ languages)
+- [ ] Advanced prompt engineering for better programs
+- [ ] Automated program refinement pipelines
+- [ ] Quality-driven program evolution
+
+#### Infrastructure Features
 - [ ] On-premises deployment option
 - [ ] Air-gapped environment support
-- [ ] Advanced cost optimization
-- [ ] Enterprise support portal
-
-#### Language Support
-- [ ] 5+ programming language SDKs
-- [ ] Framework integrations (Spring, Django, Express)
-- [ ] Legacy system connectors
-- [ ] GraphQL API gateway
+- [ ] Advanced execution cost optimization
+- [ ] Infrastructure monitoring and alerting
+- [ ] Comprehensive execution audit logs
 
 ---
 
@@ -279,7 +297,7 @@
 - [ ] GitHub Stars: 500+
 - [ ] Community Contributors: 10+
 
-### Quality KPIs (Target v1.0)
+### Quality KPIs (Target v2.0)
 - [ ] Uptime: 99.9%
 - [ ] Mean Time to Resolution: <4 hours
 - [ ] Customer Satisfaction: >90%
@@ -292,36 +310,49 @@
 
 ### v0.4 Milestones
 
-**Month 1-2**:
-- Multi-tenancy implementation
-- Advanced analytics
-- SSO integration
+**Weeks 1-3 (Phase 0 - CRITICAL)**:
+- Loop App terminology refactoring (Task → Loop App)
+- Breaking changes across all layers
+- v1.0.0 major version bump
+- **Deliverable**: v1.0.0 with refactored codebase
 
-**Month 2-3**:
-- RBAC implementation
-- A/B testing framework
-- Plugin marketplace
+**Month 2-3** (Infrastructure Focus):
+- Advanced execution analytics pipeline
+- Loop App performance monitoring
+- Program quality tracking
 
-**v0.4 Release Target**: Q1 2026
+**Month 4-5** (Infrastructure Enhancement):
+- A/B testing for program versions
+- Plugin ecosystem improvements
+- Enhanced observability for infrastructure
 
-### v1.0 Milestones
+**v0.4 Release Target**: Q2 2026 (focused on infrastructure capabilities)
 
-**Month 1-3**:
-- Compliance certifications
-- Multi-region deployment
-- Advanced security features
+---
+
+**Note on Versioning**:
+- **v1.0.0** = Refactored codebase with Loop App terminology (Breaking Change from v0.3)
+- **v0.4.x** = Infrastructure enhancements built on v1.0.0 foundation
+- **v2.0** = Production-grade infrastructure (formerly planned as "v1.0")
+
+### v2.0 Production Infrastructure Milestones
+
+**Month 1-3 (After v0.4)**:
+- Infrastructure reliability improvements
+- Multi-region deployment for high availability
+- Advanced execution performance optimization
 
 **Month 4-6**:
-- Additional language SDKs
-- Enterprise features
-- Production hardening
+- Multi-language program generation (5+ languages)
+- Federated learning for program improvement
+- Production hardening and scaling
 
 **Month 7-9**:
-- Beta testing with enterprise customers
-- Documentation completion
-- Launch preparation
+- On-premises deployment support
+- Beta testing with infrastructure users
+- Documentation and deployment guides
 
-**v1.0 Release Target**: Q3-Q4 2026
+**v2.0 Release Target**: Q3-Q4 2026
 
 ---
 
@@ -367,6 +398,7 @@
 
 ---
 
-**Version**: 2.0
-**Status**: v0.3 Complete, v0.4 Planning
+**Version**: 3.0
+**Status**: v0.3 Complete, Phase 0 (v1.0.0 Refactoring) In Progress
 **Next Review**: Weekly sprint planning
+**Breaking Change Alert**: Phase 0 refactoring required before v0.4 infrastructure enhancements

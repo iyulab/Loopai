@@ -23,19 +23,35 @@ Instead of making repeated calls to language models, Loopai generates programs o
 ### Architecture Overview
 
 ```
-Cloud Platform (Generate & Improve)
-    ↓
-Edge Runtime (Execute & Store)
-    ↓
-Client SDKs (.NET, Python, TypeScript)
-    ↓
-Local Filesystem (Execution logs)
+┌─────────────────────────────────────┐
+│     Consumer Applications           │ (Your End-User Apps)
+│  (E-commerce, Email, Support, etc.) │
+└──────────────┬──────────────────────┘
+               │ Uses multiple Loop Apps
+               ▼
+┌─────────────────────────────────────┐
+│         Loop Apps                   │ (Individual Task Instances)
+│  spam-detector, sentiment-analyzer  │
+│  email-categorizer, etc.            │
+└──────────────┬──────────────────────┘
+               │ Built on & Managed by
+               ▼
+┌─────────────────────────────────────┐
+│     Loopai Framework                │ (Infrastructure Middleware)
+├─────────────────────────────────────┤
+│ Cloud Platform                      │ → Generate & Improve Programs
+│ Edge Runtime                        │ → Execute & Store Data
+│ Client SDKs                         │ → .NET, Python, TypeScript
+│ CodeBeaker                          │ → Multi-Language Execution
+└─────────────────────────────────────┘
 ```
 
-**Cloud Platform**: C#/.NET API for program generation and management
-**Client SDKs**: Multi-language clients (.NET, Python, TypeScript)
-**Edge Runtime**: Program executor with dataset management
+**Loopai Framework**: Infrastructure middleware for program synthesis and execution
+**Loop Apps**: Individual task instances (e.g., spam-detector-001, sentiment-analyzer-001)
+**Consumer Apps**: Your applications that use multiple Loop Apps
 **CodeBeaker**: Multi-language execution engine (Python, JavaScript, Go, C#)
+
+> **New to Loopai?** Read [CONCEPTS.md](docs/CONCEPTS.md) for a clear explanation of Loop Apps and how they relate to the framework.
 
 ---
 
@@ -67,6 +83,8 @@ dotnet run
 
 ### Basic Usage
 
+Each Loop App has its own execution endpoint. Here's how to execute programs:
+
 **.NET**:
 ```csharp
 builder.Services.AddLoopaiClient(options =>
@@ -74,8 +92,9 @@ builder.Services.AddLoopaiClient(options =>
     options.BaseUrl = "http://localhost:8080";
 });
 
-// Use in controller
-var result = await _loopai.ExecuteAsync(taskId, new { text = "sample" });
+// Execute spam detector Loop App
+var result = await _loopai.ExecuteAsync("spam-detector-001", new { text = "Buy now!" });
+// Result: { "output": "spam", "latency_ms": 3.2 }
 ```
 
 **Python**:
@@ -83,7 +102,10 @@ var result = await _loopai.ExecuteAsync(taskId, new { text = "sample" });
 from loopai import LoopaiClient
 
 async with LoopaiClient("http://localhost:8080") as client:
-    result = await client.execute(task_id, input_data)
+    # Execute sentiment analyzer Loop App
+    result = await client.execute("sentiment-analyzer-001",
+                                  {"feedback": "Great product!"})
+    # Result: { "output": "positive", "latency_ms": 4.1 }
 ```
 
 **TypeScript**:
@@ -91,8 +113,16 @@ async with LoopaiClient("http://localhost:8080") as client:
 import { LoopaiClient } from '@loopai/sdk';
 
 const client = new LoopaiClient({ baseUrl: 'http://localhost:8080' });
-const result = await client.execute({ taskId, input });
+
+// Execute email categorizer Loop App
+const result = await client.execute({
+  loopAppId: 'email-categorizer-001',
+  input: { subject: 'Meeting tomorrow', body: '...' }
+});
+// Result: { output: 'inbox', latency_ms: 2.8 }
 ```
+
+> **Note**: Loop App IDs follow the pattern `{task-name}-{instance}` (e.g., `spam-detector-001`). See [CONCEPTS.md](docs/CONCEPTS.md) for details.
 
 ---
 
